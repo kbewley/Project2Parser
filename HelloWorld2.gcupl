@@ -1,0 +1,10 @@
+int main()
+{
+	int x;
+    writeln;
+    x = 6;
+    if(x == 6){
+        writeln;
+    }
+    return 0;
+}
