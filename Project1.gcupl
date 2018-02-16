@@ -1,11 +1,11 @@
+int multiply(int x , int y){
+int x;
+int y;
+int sum;
+while(sum == 0) 
+return x;
 
-
-int main(){
-	int x;
-	int y;
-	int sum;
-	x = 6;
-	y = 7;
-	return x;
 }
+	
+
 

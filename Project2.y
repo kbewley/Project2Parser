@@ -12,7 +12,6 @@ extern char* yytext;
 extern FILE *yyin;
 %}
 
-%define parse.error verbose
 
 
 %union {
@@ -108,7 +107,7 @@ ParamDeclList  		: /*empty*/ 																		{std::cout<< "Bison Recognized Em
 			   		| ParamDeclListTail																	{std::cout<< "Bison Recognized ParamDeclListTail \n";}
 			   		;
 			   	
-ParamDeclListTail 	: ParamDecl	  																		{std::cout<< "Bison Recognized a Token \n";}
+ParamDeclListTail 	: ParamDecl	  																		{std::cout<< "Bison Recognized a ParamDecl \n";}
 				 	| ParamDecl COMMA_OPERATOR ParamDeclListTail										{std::cout<< "Bison Recognized ParamList \n";}
 				 	;
 				 

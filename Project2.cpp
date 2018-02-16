@@ -1561,7 +1561,7 @@ yyreduce:
 
   case 13:
 #line 110 "Project2.y"
-    {std::cout<< "Bison Recognized a Token \n";;}
+    {std::cout<< "Bison Recognized a ParamDecl \n";;}
     break;
 
   case 14:
