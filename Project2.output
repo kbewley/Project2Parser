@@ -3,135 +3,126 @@ Terminals which are not used
    THEN_STATEMENT
 
 
-State 85 conflicts: 12 shift/reduce
-State 89 conflicts: 12 shift/reduce
-State 90 conflicts: 1 shift/reduce
+State 57 conflicts: 12 shift/reduce
+State 65 conflicts: 12 shift/reduce
+State 66 conflicts: 1 shift/reduce
+State 71 conflicts: 12 shift/reduce
 State 95 conflicts: 12 shift/reduce
-State 106 conflicts: 12 shift/reduce
 
 
 Grammar
 
     0 $accept: program $end
 
-    1 program: FuncDeclList
-    2        | VarDeclList
+    1 program: StmtList
 
-    3 VarDeclList: /* empty */
-    4            | VarDecl VarDeclList
+    2 ParamDeclList: /* empty */
+    3              | ParamDeclListTail
 
-    5 VarDecl: TYPE IDENTIFIER NEXTLINE
-    6        | TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE
+    4 ParamDeclListTail: ParamDecl
+    5                  | ParamDecl COMMA_OPERATOR ParamDeclListTail
 
-    7 FuncDeclList: FuncDecl
-    8             | FuncDecl FuncDeclList
+    6 ParamDecl: TYPE IDENTIFIER
+    7          | TYPE IDENTIFIER SQUARELEFTBRACKET SQUARERIGHTBRACKET
 
-    9 FuncDecl: TYPE IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR Block
+    8 Block: LEFTBRACE StmtList RIGHTBRACE
 
-   10 ParamDeclList: /* empty */
-   11              | ParamDeclListTail
+    9 StmtList: Stmt
+   10         | Stmt StmtList
 
-   12 ParamDeclListTail: ParamDecl
-   13                  | ParamDecl COMMA_OPERATOR ParamDeclListTail
+   11 Stmt: NEXTLINE
+   12     | READ_STATEMENT IDENTIFIER NEXTLINE
+   13     | IF_STATEMENT LEFTPAR expression RIGHTPAR Stmt ELSE_STATEMENT Stmt
+   14     | WHILE_STATEMENT LEFTPAR expression RIGHTPAR
+   15     | WRITE_STATEMENT expression NEXTLINE
+   16     | WRITELN_STATEMENT NEXTLINE
+   17     | BREAK_STATEMENT NEXTLINE
+   18     | RETURN_STATEMENT IDENTIFIER NEXTLINE
+   19     | Block
+   20     | TYPE IDENTIFIER NEXTLINE
+   21     | TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE
+   22     | TYPE IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR Block
 
-   14 ParamDecl: TYPE IDENTIFIER
-   15          | TYPE IDENTIFIER SQUARELEFTBRACKET SQUARERIGHTBRACKET
+   23 expression: Primary
+   24           | UnaryOp expression
+   25           | expression BinaryOp expression
+   26           | IDENTIFIER LEFTPAR ExprList RIGHTPAR
+   27           | IDENTIFIER EQUAL_OPERATOR expression
+   28           | IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET EQUAL_OPERATOR expression
 
-   16 Block: LEFTBRACE VarDeclList StmtList RIGHTBRACE
+   29 Primary: IDENTIFIER
+   30        | INTEGER
+   31        | LEFTPAR expression RIGHTPAR
+   32        | IDENTIFIER LEFTPAR expression RIGHTPAR
+   33        | IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET
 
-   17 StmtList: Stmt
-   18         | Stmt StmtList
+   34 ExprList: /* empty */
+   35         | ExprListTail
 
-   19 Stmt: NEXTLINE
-   20     | READ_STATEMENT IDENTIFIER NEXTLINE
-   21     | IF_STATEMENT LEFTPAR expression RIGHTPAR Stmt ELSE_STATEMENT Stmt
-   22     | WHILE_STATEMENT LEFTPAR expression RIGHTPAR
-   23     | WRITE_STATEMENT expression NEXTLINE
-   24     | WRITELN_STATEMENT NEXTLINE
-   25     | BREAK_STATEMENT NEXTLINE
-   26     | RETURN_STATEMENT IDENTIFIER NEXTLINE
-   27     | Block
+   36 ExprListTail: expression
+   37             | expression COMMA_OPERATOR ExprListTail
 
-   28 expression: Primary
-   29           | UnaryOp expression
-   30           | expression BinaryOp expression
-   31           | IDENTIFIER LEFTPAR ExprList RIGHTPAR
-   32           | IDENTIFIER EQUAL_OPERATOR expression
-   33           | IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET EQUAL_OPERATOR expression
+   38 UnaryOp: SUB_OPERATOR
+   39        | NOT_OPERATOR
 
-   34 Primary: IDENTIFIER
-   35        | INTEGER
-   36        | LEFTPAR expression RIGHTPAR
-   37        | IDENTIFIER LEFTPAR expression RIGHTPAR
-   38        | IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET
+   40 BinaryOp: ADD_OPERATOR
+   41         | SUB_OPERATOR
+   42         | MULTIPLY_OPERATOR
+   43         | DIVIDE_OPERATOR
+   44         | EQ_COMPARISON
+   45         | NOT_EQ_COMPARISON
+   46         | GREATER_COMPARISON
+   47         | GREATEREQ_COMPARISON
+   48         | LESS_COMPARISON
+   49         | LESSEQ_COMPARISON
+   50         | AND_COMPARISON
+   51         | OR_COMPARISON
 
-   39 ExprList: /* empty */
-   40         | ExprListTail
-
-   41 ExprListTail: expression
-   42             | expression COMMA_OPERATOR ExprListTail
-
-   43 UnaryOp: SUB_OPERATOR
-   44        | NOT_OPERATOR
-
-   45 BinaryOp: ADD_OPERATOR
-   46         | SUB_OPERATOR
-   47         | MULTIPLY_OPERATOR
-   48         | DIVIDE_OPERATOR
-   49         | EQ_COMPARISON
-   50         | NOT_EQ_COMPARISON
-   51         | GREATER_COMPARISON
-   52         | GREATEREQ_COMPARISON
-   53         | LESS_COMPARISON
-   54         | LESSEQ_COMPARISON
-   55         | AND_COMPARISON
-   56         | OR_COMPARISON
-
-   57 TYPE: INT_TYPE
-   58     | CHAR_TYPE
-   59     | FLOAT
+   52 TYPE: INT_TYPE
+   53     | CHAR_TYPE
+   54     | FLOAT
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-IF_STATEMENT (258) 21
-ELSE_STATEMENT (259) 21
+IF_STATEMENT (258) 13
+ELSE_STATEMENT (259) 13
 THEN_STATEMENT (260)
-RETURN_STATEMENT (261) 26
-WHILE_STATEMENT (262) 22
-WRITE_STATEMENT (263) 23
-WRITELN_STATEMENT (264) 24
-READ_STATEMENT (265) 20
-BREAK_STATEMENT (266) 25
-GREATER_COMPARISON (267) 51
-GREATEREQ_COMPARISON (268) 52
-LESS_COMPARISON (269) 53
-LESSEQ_COMPARISON (270) 54
-EQ_COMPARISON (271) 49
-NOT_EQ_COMPARISON (272) 50
-OR_COMPARISON (273) 56
-AND_COMPARISON (274) 55
-NOT_OPERATOR (275) 44
-ADD_OPERATOR (276) 45
-SUB_OPERATOR (277) 43 46
-MULTIPLY_OPERATOR (278) 47
-DIVIDE_OPERATOR (279) 48
-EQUAL_OPERATOR (280) 32 33
-COMMA_OPERATOR (281) 13 42
-INT_TYPE (282) 57
-CHAR_TYPE (283) 58
-IDENTIFIER (284) 5 6 9 14 15 20 26 31 32 33 34 37 38
-INTEGER (285) 6 35
-FLOAT (286) 59
-LEFTBRACE (287) 16
-RIGHTBRACE (288) 16
-LEFTPAR (289) 9 21 22 31 36 37
-RIGHTPAR (290) 9 21 22 31 36 37
-SQUARELEFTBRACKET (291) 6 15 33 38
-SQUARERIGHTBRACKET (292) 6 15 33 38
-NEXTLINE (293) 5 6 19 20 23 24 25 26
+RETURN_STATEMENT (261) 18
+WHILE_STATEMENT (262) 14
+WRITE_STATEMENT (263) 15
+WRITELN_STATEMENT (264) 16
+READ_STATEMENT (265) 12
+BREAK_STATEMENT (266) 17
+GREATER_COMPARISON (267) 46
+GREATEREQ_COMPARISON (268) 47
+LESS_COMPARISON (269) 48
+LESSEQ_COMPARISON (270) 49
+EQ_COMPARISON (271) 44
+NOT_EQ_COMPARISON (272) 45
+OR_COMPARISON (273) 51
+AND_COMPARISON (274) 50
+NOT_OPERATOR (275) 39
+ADD_OPERATOR (276) 40
+SUB_OPERATOR (277) 38 41
+MULTIPLY_OPERATOR (278) 42
+DIVIDE_OPERATOR (279) 43
+EQUAL_OPERATOR (280) 27 28
+COMMA_OPERATOR (281) 5 37
+INT_TYPE (282) 52
+CHAR_TYPE (283) 53
+IDENTIFIER (284) 6 7 12 18 20 21 22 26 27 28 29 32 33
+INTEGER (285) 21 30
+FLOAT (286) 54
+LEFTBRACE (287) 8
+RIGHTBRACE (288) 8
+LEFTPAR (289) 13 14 22 26 31 32
+RIGHTPAR (290) 13 14 22 26 31 32
+SQUARELEFTBRACKET (291) 7 21 28 33
+SQUARERIGHTBRACKET (292) 7 21 28 33
+NEXTLINE (293) 11 12 15 16 17 18 20 21
 
 
 Nonterminals, with rules where they appear
@@ -139,1239 +130,1155 @@ Nonterminals, with rules where they appear
 $accept (39)
     on left: 0
 program (40)
-    on left: 1 2, on right: 0
-VarDeclList (41)
-    on left: 3 4, on right: 2 4 16
-VarDecl (42)
-    on left: 5 6, on right: 4
-FuncDeclList (43)
-    on left: 7 8, on right: 1 8
-FuncDecl (44)
-    on left: 9, on right: 7 8
-ParamDeclList (45)
-    on left: 10 11, on right: 9
-ParamDeclListTail (46)
-    on left: 12 13, on right: 11 13
-ParamDecl (47)
-    on left: 14 15, on right: 12 13
-Block (48)
-    on left: 16, on right: 9 27
-StmtList (49)
-    on left: 17 18, on right: 16 18
-Stmt (50)
-    on left: 19 20 21 22 23 24 25 26 27, on right: 17 18 21
-expression (51)
-    on left: 28 29 30 31 32 33, on right: 21 22 23 29 30 32 33 36 37
-    38 41 42
-Primary (52)
-    on left: 34 35 36 37 38, on right: 28
-ExprList (53)
-    on left: 39 40, on right: 31
-ExprListTail (54)
-    on left: 41 42, on right: 40 42
-UnaryOp (55)
-    on left: 43 44, on right: 29
-BinaryOp (56)
-    on left: 45 46 47 48 49 50 51 52 53 54 55 56, on right: 30
-TYPE (57)
-    on left: 57 58 59, on right: 5 6 9 14 15
+    on left: 1, on right: 0
+ParamDeclList (41)
+    on left: 2 3, on right: 22
+ParamDeclListTail (42)
+    on left: 4 5, on right: 3 5
+ParamDecl (43)
+    on left: 6 7, on right: 4 5
+Block (44)
+    on left: 8, on right: 19 22
+StmtList (45)
+    on left: 9 10, on right: 1 8 10
+Stmt (46)
+    on left: 11 12 13 14 15 16 17 18 19 20 21 22, on right: 9 10 13
+expression (47)
+    on left: 23 24 25 26 27 28, on right: 13 14 15 24 25 27 28 31 32
+    33 36 37
+Primary (48)
+    on left: 29 30 31 32 33, on right: 23
+ExprList (49)
+    on left: 34 35, on right: 26
+ExprListTail (50)
+    on left: 36 37, on right: 35 37
+UnaryOp (51)
+    on left: 38 39, on right: 24
+BinaryOp (52)
+    on left: 40 41 42 43 44 45 46 47 48 49 50 51, on right: 25
+TYPE (53)
+    on left: 52 53 54, on right: 6 7 20 21 22
 
 
 state 0
 
     0 $accept: . program $end
 
-    INT_TYPE   shift, and go to state 1
-    CHAR_TYPE  shift, and go to state 2
-    FLOAT      shift, and go to state 3
+    IF_STATEMENT       shift, and go to state 1
+    RETURN_STATEMENT   shift, and go to state 2
+    WHILE_STATEMENT    shift, and go to state 3
+    WRITE_STATEMENT    shift, and go to state 4
+    WRITELN_STATEMENT  shift, and go to state 5
+    READ_STATEMENT     shift, and go to state 6
+    BREAK_STATEMENT    shift, and go to state 7
+    INT_TYPE           shift, and go to state 8
+    CHAR_TYPE          shift, and go to state 9
+    FLOAT              shift, and go to state 10
+    LEFTBRACE          shift, and go to state 11
+    NEXTLINE           shift, and go to state 12
 
-    $default  reduce using rule 3 (VarDeclList)
-
-    program       go to state 4
-    VarDeclList   go to state 5
-    VarDecl       go to state 6
-    FuncDeclList  go to state 7
-    FuncDecl      go to state 8
-    TYPE          go to state 9
+    program   go to state 13
+    Block     go to state 14
+    StmtList  go to state 15
+    Stmt      go to state 16
+    TYPE      go to state 17
 
 
 state 1
 
-   57 TYPE: INT_TYPE .
+   13 Stmt: IF_STATEMENT . LEFTPAR expression RIGHTPAR Stmt ELSE_STATEMENT Stmt
 
-    $default  reduce using rule 57 (TYPE)
+    LEFTPAR  shift, and go to state 18
 
 
 state 2
 
-   58 TYPE: CHAR_TYPE .
+   18 Stmt: RETURN_STATEMENT . IDENTIFIER NEXTLINE
 
-    $default  reduce using rule 58 (TYPE)
+    IDENTIFIER  shift, and go to state 19
 
 
 state 3
 
-   59 TYPE: FLOAT .
+   14 Stmt: WHILE_STATEMENT . LEFTPAR expression RIGHTPAR
 
-    $default  reduce using rule 59 (TYPE)
+    LEFTPAR  shift, and go to state 20
 
 
 state 4
 
-    0 $accept: program . $end
+   15 Stmt: WRITE_STATEMENT . expression NEXTLINE
 
-    $end  shift, and go to state 10
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
+
+    expression  go to state 26
+    Primary     go to state 27
+    UnaryOp     go to state 28
 
 
 state 5
 
-    2 program: VarDeclList .
+   16 Stmt: WRITELN_STATEMENT . NEXTLINE
 
-    $default  reduce using rule 2 (program)
+    NEXTLINE  shift, and go to state 29
 
 
 state 6
 
-    4 VarDeclList: VarDecl . VarDeclList
+   12 Stmt: READ_STATEMENT . IDENTIFIER NEXTLINE
 
-    INT_TYPE   shift, and go to state 1
-    CHAR_TYPE  shift, and go to state 2
-    FLOAT      shift, and go to state 3
-
-    $default  reduce using rule 3 (VarDeclList)
-
-    VarDeclList  go to state 11
-    VarDecl      go to state 6
-    TYPE         go to state 12
+    IDENTIFIER  shift, and go to state 30
 
 
 state 7
 
-    1 program: FuncDeclList .
+   17 Stmt: BREAK_STATEMENT . NEXTLINE
 
-    $default  reduce using rule 1 (program)
+    NEXTLINE  shift, and go to state 31
 
 
 state 8
 
-    7 FuncDeclList: FuncDecl .
-    8             | FuncDecl . FuncDeclList
+   52 TYPE: INT_TYPE .
 
-    INT_TYPE   shift, and go to state 1
-    CHAR_TYPE  shift, and go to state 2
-    FLOAT      shift, and go to state 3
-
-    $default  reduce using rule 7 (FuncDeclList)
-
-    FuncDeclList  go to state 13
-    FuncDecl      go to state 8
-    TYPE          go to state 14
+    $default  reduce using rule 52 (TYPE)
 
 
 state 9
 
-    5 VarDecl: TYPE . IDENTIFIER NEXTLINE
-    6        | TYPE . IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE
-    9 FuncDecl: TYPE . IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR Block
+   53 TYPE: CHAR_TYPE .
 
-    IDENTIFIER  shift, and go to state 15
+    $default  reduce using rule 53 (TYPE)
 
 
 state 10
+
+   54 TYPE: FLOAT .
+
+    $default  reduce using rule 54 (TYPE)
+
+
+state 11
+
+    8 Block: LEFTBRACE . StmtList RIGHTBRACE
+
+    IF_STATEMENT       shift, and go to state 1
+    RETURN_STATEMENT   shift, and go to state 2
+    WHILE_STATEMENT    shift, and go to state 3
+    WRITE_STATEMENT    shift, and go to state 4
+    WRITELN_STATEMENT  shift, and go to state 5
+    READ_STATEMENT     shift, and go to state 6
+    BREAK_STATEMENT    shift, and go to state 7
+    INT_TYPE           shift, and go to state 8
+    CHAR_TYPE          shift, and go to state 9
+    FLOAT              shift, and go to state 10
+    LEFTBRACE          shift, and go to state 11
+    NEXTLINE           shift, and go to state 12
+
+    Block     go to state 14
+    StmtList  go to state 32
+    Stmt      go to state 16
+    TYPE      go to state 17
+
+
+state 12
+
+   11 Stmt: NEXTLINE .
+
+    $default  reduce using rule 11 (Stmt)
+
+
+state 13
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 33
+
+
+state 14
+
+   19 Stmt: Block .
+
+    $default  reduce using rule 19 (Stmt)
+
+
+state 15
+
+    1 program: StmtList .
+
+    $default  reduce using rule 1 (program)
+
+
+state 16
+
+    9 StmtList: Stmt .
+   10         | Stmt . StmtList
+
+    IF_STATEMENT       shift, and go to state 1
+    RETURN_STATEMENT   shift, and go to state 2
+    WHILE_STATEMENT    shift, and go to state 3
+    WRITE_STATEMENT    shift, and go to state 4
+    WRITELN_STATEMENT  shift, and go to state 5
+    READ_STATEMENT     shift, and go to state 6
+    BREAK_STATEMENT    shift, and go to state 7
+    INT_TYPE           shift, and go to state 8
+    CHAR_TYPE          shift, and go to state 9
+    FLOAT              shift, and go to state 10
+    LEFTBRACE          shift, and go to state 11
+    NEXTLINE           shift, and go to state 12
+
+    $default  reduce using rule 9 (StmtList)
+
+    Block     go to state 14
+    StmtList  go to state 34
+    Stmt      go to state 16
+    TYPE      go to state 17
+
+
+state 17
+
+   20 Stmt: TYPE . IDENTIFIER NEXTLINE
+   21     | TYPE . IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE
+   22     | TYPE . IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR Block
+
+    IDENTIFIER  shift, and go to state 35
+
+
+state 18
+
+   13 Stmt: IF_STATEMENT LEFTPAR . expression RIGHTPAR Stmt ELSE_STATEMENT Stmt
+
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
+
+    expression  go to state 36
+    Primary     go to state 27
+    UnaryOp     go to state 28
+
+
+state 19
+
+   18 Stmt: RETURN_STATEMENT IDENTIFIER . NEXTLINE
+
+    NEXTLINE  shift, and go to state 37
+
+
+state 20
+
+   14 Stmt: WHILE_STATEMENT LEFTPAR . expression RIGHTPAR
+
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
+
+    expression  go to state 38
+    Primary     go to state 27
+    UnaryOp     go to state 28
+
+
+state 21
+
+   39 UnaryOp: NOT_OPERATOR .
+
+    $default  reduce using rule 39 (UnaryOp)
+
+
+state 22
+
+   38 UnaryOp: SUB_OPERATOR .
+
+    $default  reduce using rule 38 (UnaryOp)
+
+
+state 23
+
+   26 expression: IDENTIFIER . LEFTPAR ExprList RIGHTPAR
+   27           | IDENTIFIER . EQUAL_OPERATOR expression
+   28           | IDENTIFIER . SQUARELEFTBRACKET expression SQUARERIGHTBRACKET EQUAL_OPERATOR expression
+   29 Primary: IDENTIFIER .
+   32        | IDENTIFIER . LEFTPAR expression RIGHTPAR
+   33        | IDENTIFIER . SQUARELEFTBRACKET expression SQUARERIGHTBRACKET
+
+    EQUAL_OPERATOR     shift, and go to state 39
+    LEFTPAR            shift, and go to state 40
+    SQUARELEFTBRACKET  shift, and go to state 41
+
+    $default  reduce using rule 29 (Primary)
+
+
+state 24
+
+   30 Primary: INTEGER .
+
+    $default  reduce using rule 30 (Primary)
+
+
+state 25
+
+   31 Primary: LEFTPAR . expression RIGHTPAR
+
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
+
+    expression  go to state 42
+    Primary     go to state 27
+    UnaryOp     go to state 28
+
+
+state 26
+
+   15 Stmt: WRITE_STATEMENT expression . NEXTLINE
+   25 expression: expression . BinaryOp expression
+
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+    NEXTLINE              shift, and go to state 55
+
+    BinaryOp  go to state 56
+
+
+state 27
+
+   23 expression: Primary .
+
+    $default  reduce using rule 23 (expression)
+
+
+state 28
+
+   24 expression: UnaryOp . expression
+
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
+
+    expression  go to state 57
+    Primary     go to state 27
+    UnaryOp     go to state 28
+
+
+state 29
+
+   16 Stmt: WRITELN_STATEMENT NEXTLINE .
+
+    $default  reduce using rule 16 (Stmt)
+
+
+state 30
+
+   12 Stmt: READ_STATEMENT IDENTIFIER . NEXTLINE
+
+    NEXTLINE  shift, and go to state 58
+
+
+state 31
+
+   17 Stmt: BREAK_STATEMENT NEXTLINE .
+
+    $default  reduce using rule 17 (Stmt)
+
+
+state 32
+
+    8 Block: LEFTBRACE StmtList . RIGHTBRACE
+
+    RIGHTBRACE  shift, and go to state 59
+
+
+state 33
 
     0 $accept: program $end .
 
     $default  accept
 
 
-state 11
-
-    4 VarDeclList: VarDecl VarDeclList .
-
-    $default  reduce using rule 4 (VarDeclList)
-
-
-state 12
-
-    5 VarDecl: TYPE . IDENTIFIER NEXTLINE
-    6        | TYPE . IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE
-
-    IDENTIFIER  shift, and go to state 16
-
-
-state 13
-
-    8 FuncDeclList: FuncDecl FuncDeclList .
-
-    $default  reduce using rule 8 (FuncDeclList)
-
-
-state 14
-
-    9 FuncDecl: TYPE . IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR Block
-
-    IDENTIFIER  shift, and go to state 17
-
-
-state 15
-
-    5 VarDecl: TYPE IDENTIFIER . NEXTLINE
-    6        | TYPE IDENTIFIER . SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE
-    9 FuncDecl: TYPE IDENTIFIER . LEFTPAR ParamDeclList RIGHTPAR Block
-
-    LEFTPAR            shift, and go to state 18
-    SQUARELEFTBRACKET  shift, and go to state 19
-    NEXTLINE           shift, and go to state 20
-
-
-state 16
-
-    5 VarDecl: TYPE IDENTIFIER . NEXTLINE
-    6        | TYPE IDENTIFIER . SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE
-
-    SQUARELEFTBRACKET  shift, and go to state 19
-    NEXTLINE           shift, and go to state 20
-
-
-state 17
-
-    9 FuncDecl: TYPE IDENTIFIER . LEFTPAR ParamDeclList RIGHTPAR Block
-
-    LEFTPAR  shift, and go to state 18
-
-
-state 18
-
-    9 FuncDecl: TYPE IDENTIFIER LEFTPAR . ParamDeclList RIGHTPAR Block
-
-    INT_TYPE   shift, and go to state 1
-    CHAR_TYPE  shift, and go to state 2
-    FLOAT      shift, and go to state 3
-
-    $default  reduce using rule 10 (ParamDeclList)
-
-    ParamDeclList      go to state 21
-    ParamDeclListTail  go to state 22
-    ParamDecl          go to state 23
-    TYPE               go to state 24
-
-
-state 19
-
-    6 VarDecl: TYPE IDENTIFIER SQUARELEFTBRACKET . INTEGER SQUARERIGHTBRACKET NEXTLINE
-
-    INTEGER  shift, and go to state 25
-
-
-state 20
-
-    5 VarDecl: TYPE IDENTIFIER NEXTLINE .
-
-    $default  reduce using rule 5 (VarDecl)
-
-
-state 21
-
-    9 FuncDecl: TYPE IDENTIFIER LEFTPAR ParamDeclList . RIGHTPAR Block
-
-    RIGHTPAR  shift, and go to state 26
-
-
-state 22
-
-   11 ParamDeclList: ParamDeclListTail .
-
-    $default  reduce using rule 11 (ParamDeclList)
-
-
-state 23
-
-   12 ParamDeclListTail: ParamDecl .
-   13                  | ParamDecl . COMMA_OPERATOR ParamDeclListTail
-
-    COMMA_OPERATOR  shift, and go to state 27
-
-    $default  reduce using rule 12 (ParamDeclListTail)
-
-
-state 24
-
-   14 ParamDecl: TYPE . IDENTIFIER
-   15          | TYPE . IDENTIFIER SQUARELEFTBRACKET SQUARERIGHTBRACKET
-
-    IDENTIFIER  shift, and go to state 28
-
-
-state 25
-
-    6 VarDecl: TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER . SQUARERIGHTBRACKET NEXTLINE
-
-    SQUARERIGHTBRACKET  shift, and go to state 29
-
-
-state 26
-
-    9 FuncDecl: TYPE IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR . Block
-
-    LEFTBRACE  shift, and go to state 30
-
-    Block  go to state 31
-
-
-state 27
-
-   13 ParamDeclListTail: ParamDecl COMMA_OPERATOR . ParamDeclListTail
-
-    INT_TYPE   shift, and go to state 1
-    CHAR_TYPE  shift, and go to state 2
-    FLOAT      shift, and go to state 3
-
-    ParamDeclListTail  go to state 32
-    ParamDecl          go to state 23
-    TYPE               go to state 24
-
-
-state 28
-
-   14 ParamDecl: TYPE IDENTIFIER .
-   15          | TYPE IDENTIFIER . SQUARELEFTBRACKET SQUARERIGHTBRACKET
-
-    SQUARELEFTBRACKET  shift, and go to state 33
-
-    $default  reduce using rule 14 (ParamDecl)
-
-
-state 29
-
-    6 VarDecl: TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET . NEXTLINE
-
-    NEXTLINE  shift, and go to state 34
-
-
-state 30
-
-   16 Block: LEFTBRACE . VarDeclList StmtList RIGHTBRACE
-
-    INT_TYPE   shift, and go to state 1
-    CHAR_TYPE  shift, and go to state 2
-    FLOAT      shift, and go to state 3
-
-    $default  reduce using rule 3 (VarDeclList)
-
-    VarDeclList  go to state 35
-    VarDecl      go to state 6
-    TYPE         go to state 12
-
-
-state 31
-
-    9 FuncDecl: TYPE IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR Block .
-
-    $default  reduce using rule 9 (FuncDecl)
-
-
-state 32
-
-   13 ParamDeclListTail: ParamDecl COMMA_OPERATOR ParamDeclListTail .
-
-    $default  reduce using rule 13 (ParamDeclListTail)
-
-
-state 33
-
-   15 ParamDecl: TYPE IDENTIFIER SQUARELEFTBRACKET . SQUARERIGHTBRACKET
-
-    SQUARERIGHTBRACKET  shift, and go to state 36
-
-
 state 34
 
-    6 VarDecl: TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE .
+   10 StmtList: Stmt StmtList .
 
-    $default  reduce using rule 6 (VarDecl)
+    $default  reduce using rule 10 (StmtList)
 
 
 state 35
 
-   16 Block: LEFTBRACE VarDeclList . StmtList RIGHTBRACE
+   20 Stmt: TYPE IDENTIFIER . NEXTLINE
+   21     | TYPE IDENTIFIER . SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE
+   22     | TYPE IDENTIFIER . LEFTPAR ParamDeclList RIGHTPAR Block
 
-    IF_STATEMENT       shift, and go to state 37
-    RETURN_STATEMENT   shift, and go to state 38
-    WHILE_STATEMENT    shift, and go to state 39
-    WRITE_STATEMENT    shift, and go to state 40
-    WRITELN_STATEMENT  shift, and go to state 41
-    READ_STATEMENT     shift, and go to state 42
-    BREAK_STATEMENT    shift, and go to state 43
-    LEFTBRACE          shift, and go to state 30
-    NEXTLINE           shift, and go to state 44
-
-    Block     go to state 45
-    StmtList  go to state 46
-    Stmt      go to state 47
+    LEFTPAR            shift, and go to state 60
+    SQUARELEFTBRACKET  shift, and go to state 61
+    NEXTLINE           shift, and go to state 62
 
 
 state 36
 
-   15 ParamDecl: TYPE IDENTIFIER SQUARELEFTBRACKET SQUARERIGHTBRACKET .
+   13 Stmt: IF_STATEMENT LEFTPAR expression . RIGHTPAR Stmt ELSE_STATEMENT Stmt
+   25 expression: expression . BinaryOp expression
 
-    $default  reduce using rule 15 (ParamDecl)
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+    RIGHTPAR              shift, and go to state 63
+
+    BinaryOp  go to state 56
 
 
 state 37
 
-   21 Stmt: IF_STATEMENT . LEFTPAR expression RIGHTPAR Stmt ELSE_STATEMENT Stmt
+   18 Stmt: RETURN_STATEMENT IDENTIFIER NEXTLINE .
 
-    LEFTPAR  shift, and go to state 48
+    $default  reduce using rule 18 (Stmt)
 
 
 state 38
 
-   26 Stmt: RETURN_STATEMENT . IDENTIFIER NEXTLINE
+   14 Stmt: WHILE_STATEMENT LEFTPAR expression . RIGHTPAR
+   25 expression: expression . BinaryOp expression
 
-    IDENTIFIER  shift, and go to state 49
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+    RIGHTPAR              shift, and go to state 64
+
+    BinaryOp  go to state 56
 
 
 state 39
 
-   22 Stmt: WHILE_STATEMENT . LEFTPAR expression RIGHTPAR
+   27 expression: IDENTIFIER EQUAL_OPERATOR . expression
 
-    LEFTPAR  shift, and go to state 50
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
+
+    expression  go to state 65
+    Primary     go to state 27
+    UnaryOp     go to state 28
 
 
 state 40
 
-   23 Stmt: WRITE_STATEMENT . expression NEXTLINE
+   26 expression: IDENTIFIER LEFTPAR . ExprList RIGHTPAR
+   32 Primary: IDENTIFIER LEFTPAR . expression RIGHTPAR
 
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
 
-    expression  go to state 56
-    Primary     go to state 57
-    UnaryOp     go to state 58
+    $default  reduce using rule 34 (ExprList)
+
+    expression    go to state 66
+    Primary       go to state 27
+    ExprList      go to state 67
+    ExprListTail  go to state 68
+    UnaryOp       go to state 28
 
 
 state 41
 
-   24 Stmt: WRITELN_STATEMENT . NEXTLINE
+   28 expression: IDENTIFIER SQUARELEFTBRACKET . expression SQUARERIGHTBRACKET EQUAL_OPERATOR expression
+   33 Primary: IDENTIFIER SQUARELEFTBRACKET . expression SQUARERIGHTBRACKET
 
-    NEXTLINE  shift, and go to state 59
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
+
+    expression  go to state 69
+    Primary     go to state 27
+    UnaryOp     go to state 28
 
 
 state 42
 
-   20 Stmt: READ_STATEMENT . IDENTIFIER NEXTLINE
+   25 expression: expression . BinaryOp expression
+   31 Primary: LEFTPAR expression . RIGHTPAR
 
-    IDENTIFIER  shift, and go to state 60
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+    RIGHTPAR              shift, and go to state 70
+
+    BinaryOp  go to state 56
 
 
 state 43
 
-   25 Stmt: BREAK_STATEMENT . NEXTLINE
-
-    NEXTLINE  shift, and go to state 61
-
-
-state 44
-
-   19 Stmt: NEXTLINE .
-
-    $default  reduce using rule 19 (Stmt)
-
-
-state 45
-
-   27 Stmt: Block .
-
-    $default  reduce using rule 27 (Stmt)
-
-
-state 46
-
-   16 Block: LEFTBRACE VarDeclList StmtList . RIGHTBRACE
-
-    RIGHTBRACE  shift, and go to state 62
-
-
-state 47
-
-   17 StmtList: Stmt .
-   18         | Stmt . StmtList
-
-    IF_STATEMENT       shift, and go to state 37
-    RETURN_STATEMENT   shift, and go to state 38
-    WHILE_STATEMENT    shift, and go to state 39
-    WRITE_STATEMENT    shift, and go to state 40
-    WRITELN_STATEMENT  shift, and go to state 41
-    READ_STATEMENT     shift, and go to state 42
-    BREAK_STATEMENT    shift, and go to state 43
-    LEFTBRACE          shift, and go to state 30
-    NEXTLINE           shift, and go to state 44
-
-    $default  reduce using rule 17 (StmtList)
-
-    Block     go to state 45
-    StmtList  go to state 63
-    Stmt      go to state 47
-
-
-state 48
-
-   21 Stmt: IF_STATEMENT LEFTPAR . expression RIGHTPAR Stmt ELSE_STATEMENT Stmt
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    expression  go to state 64
-    Primary     go to state 57
-    UnaryOp     go to state 58
-
-
-state 49
-
-   26 Stmt: RETURN_STATEMENT IDENTIFIER . NEXTLINE
-
-    NEXTLINE  shift, and go to state 65
-
-
-state 50
-
-   22 Stmt: WHILE_STATEMENT LEFTPAR . expression RIGHTPAR
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    expression  go to state 66
-    Primary     go to state 57
-    UnaryOp     go to state 58
-
-
-state 51
-
-   44 UnaryOp: NOT_OPERATOR .
-
-    $default  reduce using rule 44 (UnaryOp)
-
-
-state 52
-
-   43 UnaryOp: SUB_OPERATOR .
-
-    $default  reduce using rule 43 (UnaryOp)
-
-
-state 53
-
-   31 expression: IDENTIFIER . LEFTPAR ExprList RIGHTPAR
-   32           | IDENTIFIER . EQUAL_OPERATOR expression
-   33           | IDENTIFIER . SQUARELEFTBRACKET expression SQUARERIGHTBRACKET EQUAL_OPERATOR expression
-   34 Primary: IDENTIFIER .
-   37        | IDENTIFIER . LEFTPAR expression RIGHTPAR
-   38        | IDENTIFIER . SQUARELEFTBRACKET expression SQUARERIGHTBRACKET
-
-    EQUAL_OPERATOR     shift, and go to state 67
-    LEFTPAR            shift, and go to state 68
-    SQUARELEFTBRACKET  shift, and go to state 69
-
-    $default  reduce using rule 34 (Primary)
-
-
-state 54
-
-   35 Primary: INTEGER .
-
-    $default  reduce using rule 35 (Primary)
-
-
-state 55
-
-   36 Primary: LEFTPAR . expression RIGHTPAR
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    expression  go to state 70
-    Primary     go to state 57
-    UnaryOp     go to state 58
-
-
-state 56
-
-   23 Stmt: WRITE_STATEMENT expression . NEXTLINE
-   30 expression: expression . BinaryOp expression
-
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
-    NEXTLINE              shift, and go to state 83
-
-    BinaryOp  go to state 84
-
-
-state 57
-
-   28 expression: Primary .
-
-    $default  reduce using rule 28 (expression)
-
-
-state 58
-
-   29 expression: UnaryOp . expression
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    expression  go to state 85
-    Primary     go to state 57
-    UnaryOp     go to state 58
-
-
-state 59
-
-   24 Stmt: WRITELN_STATEMENT NEXTLINE .
-
-    $default  reduce using rule 24 (Stmt)
-
-
-state 60
-
-   20 Stmt: READ_STATEMENT IDENTIFIER . NEXTLINE
-
-    NEXTLINE  shift, and go to state 86
-
-
-state 61
-
-   25 Stmt: BREAK_STATEMENT NEXTLINE .
-
-    $default  reduce using rule 25 (Stmt)
-
-
-state 62
-
-   16 Block: LEFTBRACE VarDeclList StmtList RIGHTBRACE .
-
-    $default  reduce using rule 16 (Block)
-
-
-state 63
-
-   18 StmtList: Stmt StmtList .
-
-    $default  reduce using rule 18 (StmtList)
-
-
-state 64
-
-   21 Stmt: IF_STATEMENT LEFTPAR expression . RIGHTPAR Stmt ELSE_STATEMENT Stmt
-   30 expression: expression . BinaryOp expression
-
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
-    RIGHTPAR              shift, and go to state 87
-
-    BinaryOp  go to state 84
-
-
-state 65
-
-   26 Stmt: RETURN_STATEMENT IDENTIFIER NEXTLINE .
-
-    $default  reduce using rule 26 (Stmt)
-
-
-state 66
-
-   22 Stmt: WHILE_STATEMENT LEFTPAR expression . RIGHTPAR
-   30 expression: expression . BinaryOp expression
-
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
-    RIGHTPAR              shift, and go to state 88
-
-    BinaryOp  go to state 84
-
-
-state 67
-
-   32 expression: IDENTIFIER EQUAL_OPERATOR . expression
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    expression  go to state 89
-    Primary     go to state 57
-    UnaryOp     go to state 58
-
-
-state 68
-
-   31 expression: IDENTIFIER LEFTPAR . ExprList RIGHTPAR
-   37 Primary: IDENTIFIER LEFTPAR . expression RIGHTPAR
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    $default  reduce using rule 39 (ExprList)
-
-    expression    go to state 90
-    Primary       go to state 57
-    ExprList      go to state 91
-    ExprListTail  go to state 92
-    UnaryOp       go to state 58
-
-
-state 69
-
-   33 expression: IDENTIFIER SQUARELEFTBRACKET . expression SQUARERIGHTBRACKET EQUAL_OPERATOR expression
-   38 Primary: IDENTIFIER SQUARELEFTBRACKET . expression SQUARERIGHTBRACKET
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    expression  go to state 93
-    Primary     go to state 57
-    UnaryOp     go to state 58
-
-
-state 70
-
-   30 expression: expression . BinaryOp expression
-   36 Primary: LEFTPAR expression . RIGHTPAR
-
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
-    RIGHTPAR              shift, and go to state 94
-
-    BinaryOp  go to state 84
-
-
-state 71
-
-   51 BinaryOp: GREATER_COMPARISON .
-
-    $default  reduce using rule 51 (BinaryOp)
-
-
-state 72
-
-   52 BinaryOp: GREATEREQ_COMPARISON .
-
-    $default  reduce using rule 52 (BinaryOp)
-
-
-state 73
-
-   53 BinaryOp: LESS_COMPARISON .
-
-    $default  reduce using rule 53 (BinaryOp)
-
-
-state 74
-
-   54 BinaryOp: LESSEQ_COMPARISON .
-
-    $default  reduce using rule 54 (BinaryOp)
-
-
-state 75
-
-   49 BinaryOp: EQ_COMPARISON .
-
-    $default  reduce using rule 49 (BinaryOp)
-
-
-state 76
-
-   50 BinaryOp: NOT_EQ_COMPARISON .
-
-    $default  reduce using rule 50 (BinaryOp)
-
-
-state 77
-
-   56 BinaryOp: OR_COMPARISON .
-
-    $default  reduce using rule 56 (BinaryOp)
-
-
-state 78
-
-   55 BinaryOp: AND_COMPARISON .
-
-    $default  reduce using rule 55 (BinaryOp)
-
-
-state 79
-
-   45 BinaryOp: ADD_OPERATOR .
-
-    $default  reduce using rule 45 (BinaryOp)
-
-
-state 80
-
-   46 BinaryOp: SUB_OPERATOR .
+   46 BinaryOp: GREATER_COMPARISON .
 
     $default  reduce using rule 46 (BinaryOp)
 
 
-state 81
+state 44
 
-   47 BinaryOp: MULTIPLY_OPERATOR .
+   47 BinaryOp: GREATEREQ_COMPARISON .
 
     $default  reduce using rule 47 (BinaryOp)
 
 
-state 82
+state 45
 
-   48 BinaryOp: DIVIDE_OPERATOR .
+   48 BinaryOp: LESS_COMPARISON .
 
     $default  reduce using rule 48 (BinaryOp)
 
 
-state 83
+state 46
 
-   23 Stmt: WRITE_STATEMENT expression NEXTLINE .
+   49 BinaryOp: LESSEQ_COMPARISON .
 
-    $default  reduce using rule 23 (Stmt)
-
-
-state 84
-
-   30 expression: expression BinaryOp . expression
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    expression  go to state 95
-    Primary     go to state 57
-    UnaryOp     go to state 58
+    $default  reduce using rule 49 (BinaryOp)
 
 
-state 85
+state 47
 
-   29 expression: UnaryOp expression .
-   30           | expression . BinaryOp expression
+   44 BinaryOp: EQ_COMPARISON .
 
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
-
-    GREATER_COMPARISON    [reduce using rule 29 (expression)]
-    GREATEREQ_COMPARISON  [reduce using rule 29 (expression)]
-    LESS_COMPARISON       [reduce using rule 29 (expression)]
-    LESSEQ_COMPARISON     [reduce using rule 29 (expression)]
-    EQ_COMPARISON         [reduce using rule 29 (expression)]
-    NOT_EQ_COMPARISON     [reduce using rule 29 (expression)]
-    OR_COMPARISON         [reduce using rule 29 (expression)]
-    AND_COMPARISON        [reduce using rule 29 (expression)]
-    ADD_OPERATOR          [reduce using rule 29 (expression)]
-    SUB_OPERATOR          [reduce using rule 29 (expression)]
-    MULTIPLY_OPERATOR     [reduce using rule 29 (expression)]
-    DIVIDE_OPERATOR       [reduce using rule 29 (expression)]
-    $default              reduce using rule 29 (expression)
-
-    BinaryOp  go to state 84
+    $default  reduce using rule 44 (BinaryOp)
 
 
-state 86
+state 48
 
-   20 Stmt: READ_STATEMENT IDENTIFIER NEXTLINE .
+   45 BinaryOp: NOT_EQ_COMPARISON .
+
+    $default  reduce using rule 45 (BinaryOp)
+
+
+state 49
+
+   51 BinaryOp: OR_COMPARISON .
+
+    $default  reduce using rule 51 (BinaryOp)
+
+
+state 50
+
+   50 BinaryOp: AND_COMPARISON .
+
+    $default  reduce using rule 50 (BinaryOp)
+
+
+state 51
+
+   40 BinaryOp: ADD_OPERATOR .
+
+    $default  reduce using rule 40 (BinaryOp)
+
+
+state 52
+
+   41 BinaryOp: SUB_OPERATOR .
+
+    $default  reduce using rule 41 (BinaryOp)
+
+
+state 53
+
+   42 BinaryOp: MULTIPLY_OPERATOR .
+
+    $default  reduce using rule 42 (BinaryOp)
+
+
+state 54
+
+   43 BinaryOp: DIVIDE_OPERATOR .
+
+    $default  reduce using rule 43 (BinaryOp)
+
+
+state 55
+
+   15 Stmt: WRITE_STATEMENT expression NEXTLINE .
+
+    $default  reduce using rule 15 (Stmt)
+
+
+state 56
+
+   25 expression: expression BinaryOp . expression
+
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
+
+    expression  go to state 71
+    Primary     go to state 27
+    UnaryOp     go to state 28
+
+
+state 57
+
+   24 expression: UnaryOp expression .
+   25           | expression . BinaryOp expression
+
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+
+    GREATER_COMPARISON    [reduce using rule 24 (expression)]
+    GREATEREQ_COMPARISON  [reduce using rule 24 (expression)]
+    LESS_COMPARISON       [reduce using rule 24 (expression)]
+    LESSEQ_COMPARISON     [reduce using rule 24 (expression)]
+    EQ_COMPARISON         [reduce using rule 24 (expression)]
+    NOT_EQ_COMPARISON     [reduce using rule 24 (expression)]
+    OR_COMPARISON         [reduce using rule 24 (expression)]
+    AND_COMPARISON        [reduce using rule 24 (expression)]
+    ADD_OPERATOR          [reduce using rule 24 (expression)]
+    SUB_OPERATOR          [reduce using rule 24 (expression)]
+    MULTIPLY_OPERATOR     [reduce using rule 24 (expression)]
+    DIVIDE_OPERATOR       [reduce using rule 24 (expression)]
+    $default              reduce using rule 24 (expression)
+
+    BinaryOp  go to state 56
+
+
+state 58
+
+   12 Stmt: READ_STATEMENT IDENTIFIER NEXTLINE .
+
+    $default  reduce using rule 12 (Stmt)
+
+
+state 59
+
+    8 Block: LEFTBRACE StmtList RIGHTBRACE .
+
+    $default  reduce using rule 8 (Block)
+
+
+state 60
+
+   22 Stmt: TYPE IDENTIFIER LEFTPAR . ParamDeclList RIGHTPAR Block
+
+    INT_TYPE   shift, and go to state 8
+    CHAR_TYPE  shift, and go to state 9
+    FLOAT      shift, and go to state 10
+
+    $default  reduce using rule 2 (ParamDeclList)
+
+    ParamDeclList      go to state 72
+    ParamDeclListTail  go to state 73
+    ParamDecl          go to state 74
+    TYPE               go to state 75
+
+
+state 61
+
+   21 Stmt: TYPE IDENTIFIER SQUARELEFTBRACKET . INTEGER SQUARERIGHTBRACKET NEXTLINE
+
+    INTEGER  shift, and go to state 76
+
+
+state 62
+
+   20 Stmt: TYPE IDENTIFIER NEXTLINE .
 
     $default  reduce using rule 20 (Stmt)
 
 
+state 63
+
+   13 Stmt: IF_STATEMENT LEFTPAR expression RIGHTPAR . Stmt ELSE_STATEMENT Stmt
+
+    IF_STATEMENT       shift, and go to state 1
+    RETURN_STATEMENT   shift, and go to state 2
+    WHILE_STATEMENT    shift, and go to state 3
+    WRITE_STATEMENT    shift, and go to state 4
+    WRITELN_STATEMENT  shift, and go to state 5
+    READ_STATEMENT     shift, and go to state 6
+    BREAK_STATEMENT    shift, and go to state 7
+    INT_TYPE           shift, and go to state 8
+    CHAR_TYPE          shift, and go to state 9
+    FLOAT              shift, and go to state 10
+    LEFTBRACE          shift, and go to state 11
+    NEXTLINE           shift, and go to state 12
+
+    Block  go to state 14
+    Stmt   go to state 77
+    TYPE   go to state 17
+
+
+state 64
+
+   14 Stmt: WHILE_STATEMENT LEFTPAR expression RIGHTPAR .
+
+    $default  reduce using rule 14 (Stmt)
+
+
+state 65
+
+   25 expression: expression . BinaryOp expression
+   27           | IDENTIFIER EQUAL_OPERATOR expression .
+
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+
+    GREATER_COMPARISON    [reduce using rule 27 (expression)]
+    GREATEREQ_COMPARISON  [reduce using rule 27 (expression)]
+    LESS_COMPARISON       [reduce using rule 27 (expression)]
+    LESSEQ_COMPARISON     [reduce using rule 27 (expression)]
+    EQ_COMPARISON         [reduce using rule 27 (expression)]
+    NOT_EQ_COMPARISON     [reduce using rule 27 (expression)]
+    OR_COMPARISON         [reduce using rule 27 (expression)]
+    AND_COMPARISON        [reduce using rule 27 (expression)]
+    ADD_OPERATOR          [reduce using rule 27 (expression)]
+    SUB_OPERATOR          [reduce using rule 27 (expression)]
+    MULTIPLY_OPERATOR     [reduce using rule 27 (expression)]
+    DIVIDE_OPERATOR       [reduce using rule 27 (expression)]
+    $default              reduce using rule 27 (expression)
+
+    BinaryOp  go to state 56
+
+
+state 66
+
+   25 expression: expression . BinaryOp expression
+   32 Primary: IDENTIFIER LEFTPAR expression . RIGHTPAR
+   36 ExprListTail: expression .
+   37             | expression . COMMA_OPERATOR ExprListTail
+
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+    COMMA_OPERATOR        shift, and go to state 78
+    RIGHTPAR              shift, and go to state 79
+
+    RIGHTPAR  [reduce using rule 36 (ExprListTail)]
+
+    BinaryOp  go to state 56
+
+
+state 67
+
+   26 expression: IDENTIFIER LEFTPAR ExprList . RIGHTPAR
+
+    RIGHTPAR  shift, and go to state 80
+
+
+state 68
+
+   35 ExprList: ExprListTail .
+
+    $default  reduce using rule 35 (ExprList)
+
+
+state 69
+
+   25 expression: expression . BinaryOp expression
+   28           | IDENTIFIER SQUARELEFTBRACKET expression . SQUARERIGHTBRACKET EQUAL_OPERATOR expression
+   33 Primary: IDENTIFIER SQUARELEFTBRACKET expression . SQUARERIGHTBRACKET
+
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+    SQUARERIGHTBRACKET    shift, and go to state 81
+
+    BinaryOp  go to state 56
+
+
+state 70
+
+   31 Primary: LEFTPAR expression RIGHTPAR .
+
+    $default  reduce using rule 31 (Primary)
+
+
+state 71
+
+   25 expression: expression . BinaryOp expression
+   25           | expression BinaryOp expression .
+
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+
+    GREATER_COMPARISON    [reduce using rule 25 (expression)]
+    GREATEREQ_COMPARISON  [reduce using rule 25 (expression)]
+    LESS_COMPARISON       [reduce using rule 25 (expression)]
+    LESSEQ_COMPARISON     [reduce using rule 25 (expression)]
+    EQ_COMPARISON         [reduce using rule 25 (expression)]
+    NOT_EQ_COMPARISON     [reduce using rule 25 (expression)]
+    OR_COMPARISON         [reduce using rule 25 (expression)]
+    AND_COMPARISON        [reduce using rule 25 (expression)]
+    ADD_OPERATOR          [reduce using rule 25 (expression)]
+    SUB_OPERATOR          [reduce using rule 25 (expression)]
+    MULTIPLY_OPERATOR     [reduce using rule 25 (expression)]
+    DIVIDE_OPERATOR       [reduce using rule 25 (expression)]
+    $default              reduce using rule 25 (expression)
+
+    BinaryOp  go to state 56
+
+
+state 72
+
+   22 Stmt: TYPE IDENTIFIER LEFTPAR ParamDeclList . RIGHTPAR Block
+
+    RIGHTPAR  shift, and go to state 82
+
+
+state 73
+
+    3 ParamDeclList: ParamDeclListTail .
+
+    $default  reduce using rule 3 (ParamDeclList)
+
+
+state 74
+
+    4 ParamDeclListTail: ParamDecl .
+    5                  | ParamDecl . COMMA_OPERATOR ParamDeclListTail
+
+    COMMA_OPERATOR  shift, and go to state 83
+
+    $default  reduce using rule 4 (ParamDeclListTail)
+
+
+state 75
+
+    6 ParamDecl: TYPE . IDENTIFIER
+    7          | TYPE . IDENTIFIER SQUARELEFTBRACKET SQUARERIGHTBRACKET
+
+    IDENTIFIER  shift, and go to state 84
+
+
+state 76
+
+   21 Stmt: TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER . SQUARERIGHTBRACKET NEXTLINE
+
+    SQUARERIGHTBRACKET  shift, and go to state 85
+
+
+state 77
+
+   13 Stmt: IF_STATEMENT LEFTPAR expression RIGHTPAR Stmt . ELSE_STATEMENT Stmt
+
+    ELSE_STATEMENT  shift, and go to state 86
+
+
+state 78
+
+   37 ExprListTail: expression COMMA_OPERATOR . ExprListTail
+
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
+
+    expression    go to state 87
+    Primary       go to state 27
+    ExprListTail  go to state 88
+    UnaryOp       go to state 28
+
+
+state 79
+
+   32 Primary: IDENTIFIER LEFTPAR expression RIGHTPAR .
+
+    $default  reduce using rule 32 (Primary)
+
+
+state 80
+
+   26 expression: IDENTIFIER LEFTPAR ExprList RIGHTPAR .
+
+    $default  reduce using rule 26 (expression)
+
+
+state 81
+
+   28 expression: IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET . EQUAL_OPERATOR expression
+   33 Primary: IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET .
+
+    EQUAL_OPERATOR  shift, and go to state 89
+
+    $default  reduce using rule 33 (Primary)
+
+
+state 82
+
+   22 Stmt: TYPE IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR . Block
+
+    LEFTBRACE  shift, and go to state 11
+
+    Block  go to state 90
+
+
+state 83
+
+    5 ParamDeclListTail: ParamDecl COMMA_OPERATOR . ParamDeclListTail
+
+    INT_TYPE   shift, and go to state 8
+    CHAR_TYPE  shift, and go to state 9
+    FLOAT      shift, and go to state 10
+
+    ParamDeclListTail  go to state 91
+    ParamDecl          go to state 74
+    TYPE               go to state 75
+
+
+state 84
+
+    6 ParamDecl: TYPE IDENTIFIER .
+    7          | TYPE IDENTIFIER . SQUARELEFTBRACKET SQUARERIGHTBRACKET
+
+    SQUARELEFTBRACKET  shift, and go to state 92
+
+    $default  reduce using rule 6 (ParamDecl)
+
+
+state 85
+
+   21 Stmt: TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET . NEXTLINE
+
+    NEXTLINE  shift, and go to state 93
+
+
+state 86
+
+   13 Stmt: IF_STATEMENT LEFTPAR expression RIGHTPAR Stmt ELSE_STATEMENT . Stmt
+
+    IF_STATEMENT       shift, and go to state 1
+    RETURN_STATEMENT   shift, and go to state 2
+    WHILE_STATEMENT    shift, and go to state 3
+    WRITE_STATEMENT    shift, and go to state 4
+    WRITELN_STATEMENT  shift, and go to state 5
+    READ_STATEMENT     shift, and go to state 6
+    BREAK_STATEMENT    shift, and go to state 7
+    INT_TYPE           shift, and go to state 8
+    CHAR_TYPE          shift, and go to state 9
+    FLOAT              shift, and go to state 10
+    LEFTBRACE          shift, and go to state 11
+    NEXTLINE           shift, and go to state 12
+
+    Block  go to state 14
+    Stmt   go to state 94
+    TYPE   go to state 17
+
+
 state 87
 
-   21 Stmt: IF_STATEMENT LEFTPAR expression RIGHTPAR . Stmt ELSE_STATEMENT Stmt
+   25 expression: expression . BinaryOp expression
+   36 ExprListTail: expression .
+   37             | expression . COMMA_OPERATOR ExprListTail
 
-    IF_STATEMENT       shift, and go to state 37
-    RETURN_STATEMENT   shift, and go to state 38
-    WHILE_STATEMENT    shift, and go to state 39
-    WRITE_STATEMENT    shift, and go to state 40
-    WRITELN_STATEMENT  shift, and go to state 41
-    READ_STATEMENT     shift, and go to state 42
-    BREAK_STATEMENT    shift, and go to state 43
-    LEFTBRACE          shift, and go to state 30
-    NEXTLINE           shift, and go to state 44
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+    COMMA_OPERATOR        shift, and go to state 78
 
-    Block  go to state 45
-    Stmt   go to state 96
+    $default  reduce using rule 36 (ExprListTail)
+
+    BinaryOp  go to state 56
 
 
 state 88
 
-   22 Stmt: WHILE_STATEMENT LEFTPAR expression RIGHTPAR .
+   37 ExprListTail: expression COMMA_OPERATOR ExprListTail .
 
-    $default  reduce using rule 22 (Stmt)
+    $default  reduce using rule 37 (ExprListTail)
 
 
 state 89
 
-   30 expression: expression . BinaryOp expression
-   32           | IDENTIFIER EQUAL_OPERATOR expression .
+   28 expression: IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET EQUAL_OPERATOR . expression
 
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
+    NOT_OPERATOR  shift, and go to state 21
+    SUB_OPERATOR  shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INTEGER       shift, and go to state 24
+    LEFTPAR       shift, and go to state 25
 
-    GREATER_COMPARISON    [reduce using rule 32 (expression)]
-    GREATEREQ_COMPARISON  [reduce using rule 32 (expression)]
-    LESS_COMPARISON       [reduce using rule 32 (expression)]
-    LESSEQ_COMPARISON     [reduce using rule 32 (expression)]
-    EQ_COMPARISON         [reduce using rule 32 (expression)]
-    NOT_EQ_COMPARISON     [reduce using rule 32 (expression)]
-    OR_COMPARISON         [reduce using rule 32 (expression)]
-    AND_COMPARISON        [reduce using rule 32 (expression)]
-    ADD_OPERATOR          [reduce using rule 32 (expression)]
-    SUB_OPERATOR          [reduce using rule 32 (expression)]
-    MULTIPLY_OPERATOR     [reduce using rule 32 (expression)]
-    DIVIDE_OPERATOR       [reduce using rule 32 (expression)]
-    $default              reduce using rule 32 (expression)
-
-    BinaryOp  go to state 84
+    expression  go to state 95
+    Primary     go to state 27
+    UnaryOp     go to state 28
 
 
 state 90
 
-   30 expression: expression . BinaryOp expression
-   37 Primary: IDENTIFIER LEFTPAR expression . RIGHTPAR
-   41 ExprListTail: expression .
-   42             | expression . COMMA_OPERATOR ExprListTail
+   22 Stmt: TYPE IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR Block .
 
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
-    COMMA_OPERATOR        shift, and go to state 97
-    RIGHTPAR              shift, and go to state 98
-
-    RIGHTPAR  [reduce using rule 41 (ExprListTail)]
-
-    BinaryOp  go to state 84
+    $default  reduce using rule 22 (Stmt)
 
 
 state 91
 
-   31 expression: IDENTIFIER LEFTPAR ExprList . RIGHTPAR
+    5 ParamDeclListTail: ParamDecl COMMA_OPERATOR ParamDeclListTail .
 
-    RIGHTPAR  shift, and go to state 99
+    $default  reduce using rule 5 (ParamDeclListTail)
 
 
 state 92
 
-   40 ExprList: ExprListTail .
+    7 ParamDecl: TYPE IDENTIFIER SQUARELEFTBRACKET . SQUARERIGHTBRACKET
 
-    $default  reduce using rule 40 (ExprList)
+    SQUARERIGHTBRACKET  shift, and go to state 96
 
 
 state 93
 
-   30 expression: expression . BinaryOp expression
-   33           | IDENTIFIER SQUARELEFTBRACKET expression . SQUARERIGHTBRACKET EQUAL_OPERATOR expression
-   38 Primary: IDENTIFIER SQUARELEFTBRACKET expression . SQUARERIGHTBRACKET
-
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
-    SQUARERIGHTBRACKET    shift, and go to state 100
-
-    BinaryOp  go to state 84
-
-
-state 94
-
-   36 Primary: LEFTPAR expression RIGHTPAR .
-
-    $default  reduce using rule 36 (Primary)
-
-
-state 95
-
-   30 expression: expression . BinaryOp expression
-   30           | expression BinaryOp expression .
-
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
-
-    GREATER_COMPARISON    [reduce using rule 30 (expression)]
-    GREATEREQ_COMPARISON  [reduce using rule 30 (expression)]
-    LESS_COMPARISON       [reduce using rule 30 (expression)]
-    LESSEQ_COMPARISON     [reduce using rule 30 (expression)]
-    EQ_COMPARISON         [reduce using rule 30 (expression)]
-    NOT_EQ_COMPARISON     [reduce using rule 30 (expression)]
-    OR_COMPARISON         [reduce using rule 30 (expression)]
-    AND_COMPARISON        [reduce using rule 30 (expression)]
-    ADD_OPERATOR          [reduce using rule 30 (expression)]
-    SUB_OPERATOR          [reduce using rule 30 (expression)]
-    MULTIPLY_OPERATOR     [reduce using rule 30 (expression)]
-    DIVIDE_OPERATOR       [reduce using rule 30 (expression)]
-    $default              reduce using rule 30 (expression)
-
-    BinaryOp  go to state 84
-
-
-state 96
-
-   21 Stmt: IF_STATEMENT LEFTPAR expression RIGHTPAR Stmt . ELSE_STATEMENT Stmt
-
-    ELSE_STATEMENT  shift, and go to state 101
-
-
-state 97
-
-   42 ExprListTail: expression COMMA_OPERATOR . ExprListTail
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    expression    go to state 102
-    Primary       go to state 57
-    ExprListTail  go to state 103
-    UnaryOp       go to state 58
-
-
-state 98
-
-   37 Primary: IDENTIFIER LEFTPAR expression RIGHTPAR .
-
-    $default  reduce using rule 37 (Primary)
-
-
-state 99
-
-   31 expression: IDENTIFIER LEFTPAR ExprList RIGHTPAR .
-
-    $default  reduce using rule 31 (expression)
-
-
-state 100
-
-   33 expression: IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET . EQUAL_OPERATOR expression
-   38 Primary: IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET .
-
-    EQUAL_OPERATOR  shift, and go to state 104
-
-    $default  reduce using rule 38 (Primary)
-
-
-state 101
-
-   21 Stmt: IF_STATEMENT LEFTPAR expression RIGHTPAR Stmt ELSE_STATEMENT . Stmt
-
-    IF_STATEMENT       shift, and go to state 37
-    RETURN_STATEMENT   shift, and go to state 38
-    WHILE_STATEMENT    shift, and go to state 39
-    WRITE_STATEMENT    shift, and go to state 40
-    WRITELN_STATEMENT  shift, and go to state 41
-    READ_STATEMENT     shift, and go to state 42
-    BREAK_STATEMENT    shift, and go to state 43
-    LEFTBRACE          shift, and go to state 30
-    NEXTLINE           shift, and go to state 44
-
-    Block  go to state 45
-    Stmt   go to state 105
-
-
-state 102
-
-   30 expression: expression . BinaryOp expression
-   41 ExprListTail: expression .
-   42             | expression . COMMA_OPERATOR ExprListTail
-
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
-    COMMA_OPERATOR        shift, and go to state 97
-
-    $default  reduce using rule 41 (ExprListTail)
-
-    BinaryOp  go to state 84
-
-
-state 103
-
-   42 ExprListTail: expression COMMA_OPERATOR ExprListTail .
-
-    $default  reduce using rule 42 (ExprListTail)
-
-
-state 104
-
-   33 expression: IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET EQUAL_OPERATOR . expression
-
-    NOT_OPERATOR  shift, and go to state 51
-    SUB_OPERATOR  shift, and go to state 52
-    IDENTIFIER    shift, and go to state 53
-    INTEGER       shift, and go to state 54
-    LEFTPAR       shift, and go to state 55
-
-    expression  go to state 106
-    Primary     go to state 57
-    UnaryOp     go to state 58
-
-
-state 105
-
-   21 Stmt: IF_STATEMENT LEFTPAR expression RIGHTPAR Stmt ELSE_STATEMENT Stmt .
+   21 Stmt: TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE .
 
     $default  reduce using rule 21 (Stmt)
 
 
-state 106
+state 94
 
-   30 expression: expression . BinaryOp expression
-   33           | IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET EQUAL_OPERATOR expression .
+   13 Stmt: IF_STATEMENT LEFTPAR expression RIGHTPAR Stmt ELSE_STATEMENT Stmt .
 
-    GREATER_COMPARISON    shift, and go to state 71
-    GREATEREQ_COMPARISON  shift, and go to state 72
-    LESS_COMPARISON       shift, and go to state 73
-    LESSEQ_COMPARISON     shift, and go to state 74
-    EQ_COMPARISON         shift, and go to state 75
-    NOT_EQ_COMPARISON     shift, and go to state 76
-    OR_COMPARISON         shift, and go to state 77
-    AND_COMPARISON        shift, and go to state 78
-    ADD_OPERATOR          shift, and go to state 79
-    SUB_OPERATOR          shift, and go to state 80
-    MULTIPLY_OPERATOR     shift, and go to state 81
-    DIVIDE_OPERATOR       shift, and go to state 82
+    $default  reduce using rule 13 (Stmt)
 
-    GREATER_COMPARISON    [reduce using rule 33 (expression)]
-    GREATEREQ_COMPARISON  [reduce using rule 33 (expression)]
-    LESS_COMPARISON       [reduce using rule 33 (expression)]
-    LESSEQ_COMPARISON     [reduce using rule 33 (expression)]
-    EQ_COMPARISON         [reduce using rule 33 (expression)]
-    NOT_EQ_COMPARISON     [reduce using rule 33 (expression)]
-    OR_COMPARISON         [reduce using rule 33 (expression)]
-    AND_COMPARISON        [reduce using rule 33 (expression)]
-    ADD_OPERATOR          [reduce using rule 33 (expression)]
-    SUB_OPERATOR          [reduce using rule 33 (expression)]
-    MULTIPLY_OPERATOR     [reduce using rule 33 (expression)]
-    DIVIDE_OPERATOR       [reduce using rule 33 (expression)]
-    $default              reduce using rule 33 (expression)
 
-    BinaryOp  go to state 84
+state 95
+
+   25 expression: expression . BinaryOp expression
+   28           | IDENTIFIER SQUARELEFTBRACKET expression SQUARERIGHTBRACKET EQUAL_OPERATOR expression .
+
+    GREATER_COMPARISON    shift, and go to state 43
+    GREATEREQ_COMPARISON  shift, and go to state 44
+    LESS_COMPARISON       shift, and go to state 45
+    LESSEQ_COMPARISON     shift, and go to state 46
+    EQ_COMPARISON         shift, and go to state 47
+    NOT_EQ_COMPARISON     shift, and go to state 48
+    OR_COMPARISON         shift, and go to state 49
+    AND_COMPARISON        shift, and go to state 50
+    ADD_OPERATOR          shift, and go to state 51
+    SUB_OPERATOR          shift, and go to state 52
+    MULTIPLY_OPERATOR     shift, and go to state 53
+    DIVIDE_OPERATOR       shift, and go to state 54
+
+    GREATER_COMPARISON    [reduce using rule 28 (expression)]
+    GREATEREQ_COMPARISON  [reduce using rule 28 (expression)]
+    LESS_COMPARISON       [reduce using rule 28 (expression)]
+    LESSEQ_COMPARISON     [reduce using rule 28 (expression)]
+    EQ_COMPARISON         [reduce using rule 28 (expression)]
+    NOT_EQ_COMPARISON     [reduce using rule 28 (expression)]
+    OR_COMPARISON         [reduce using rule 28 (expression)]
+    AND_COMPARISON        [reduce using rule 28 (expression)]
+    ADD_OPERATOR          [reduce using rule 28 (expression)]
+    SUB_OPERATOR          [reduce using rule 28 (expression)]
+    MULTIPLY_OPERATOR     [reduce using rule 28 (expression)]
+    DIVIDE_OPERATOR       [reduce using rule 28 (expression)]
+    $default              reduce using rule 28 (expression)
+
+    BinaryOp  go to state 56
+
+
+state 96
+
+    7 ParamDecl: TYPE IDENTIFIER SQUARELEFTBRACKET SQUARERIGHTBRACKET .
+
+    $default  reduce using rule 7 (ParamDecl)

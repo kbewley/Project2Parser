@@ -413,18 +413,18 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  10
+#define YYFINAL  34
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   177
+#define YYLAST   178
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  39
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  19
+#define YYNNTS  15
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  60
+#define YYNRULES  56
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  107
+#define YYNSTATES  99
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -473,49 +473,46 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     5,     7,     8,    11,    15,    22,    24,
-      27,    34,    35,    37,    39,    43,    46,    51,    56,    58,
-      61,    63,    67,    75,    80,    84,    87,    90,    94,    96,
-      98,   101,   105,   110,   114,   121,   123,   125,   129,   134,
-     139,   140,   142,   144,   148,   150,   152,   154,   156,   158,
-     160,   162,   164,   166,   168,   170,   172,   174,   176,   178,
-     180
+       0,     0,     3,     5,     6,     8,    10,    14,    17,    22,
+      26,    28,    31,    33,    37,    45,    50,    54,    57,    60,
+      64,    68,    72,    79,    86,    88,    90,    93,    97,   102,
+     106,   113,   115,   117,   121,   126,   131,   132,   134,   136,
+     140,   142,   144,   146,   148,   150,   152,   154,   156,   158,
+     160,   162,   164,   166,   168,   170,   172
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      40,     0,    -1,    43,    -1,    41,    -1,    -1,    42,    41,
-      -1,    57,    29,    38,    -1,    57,    29,    36,    30,    37,
-      38,    -1,    44,    -1,    44,    43,    -1,    57,    29,    34,
-      45,    35,    48,    -1,    -1,    46,    -1,    47,    -1,    47,
-      26,    46,    -1,    57,    29,    -1,    57,    29,    36,    37,
-      -1,    32,    41,    49,    33,    -1,    50,    -1,    50,    49,
-      -1,    38,    -1,    10,    29,    38,    -1,     3,    34,    51,
-      35,    50,     4,    50,    -1,     7,    34,    51,    35,    -1,
-       8,    51,    38,    -1,     9,    38,    -1,    11,    38,    -1,
-       6,    29,    38,    -1,    48,    -1,    52,    -1,    55,    51,
-      -1,    51,    56,    51,    -1,    29,    34,    53,    35,    -1,
-      29,    25,    51,    -1,    29,    36,    51,    37,    25,    51,
-      -1,    29,    -1,    30,    -1,    34,    51,    35,    -1,    29,
-      34,    51,    35,    -1,    29,    36,    51,    37,    -1,    -1,
-      54,    -1,    51,    -1,    51,    26,    54,    -1,    22,    -1,
-      20,    -1,    21,    -1,    22,    -1,    23,    -1,    24,    -1,
-      16,    -1,    17,    -1,    12,    -1,    13,    -1,    14,    -1,
-      15,    -1,    19,    -1,    18,    -1,    27,    -1,    28,    -1,
-      31,    -1
+      40,     0,    -1,    45,    -1,    -1,    42,    -1,    43,    -1,
+      43,    26,    42,    -1,    53,    29,    -1,    53,    29,    36,
+      37,    -1,    32,    45,    33,    -1,    46,    -1,    46,    45,
+      -1,    38,    -1,    10,    29,    38,    -1,     3,    34,    47,
+      35,    46,     4,    46,    -1,     7,    34,    47,    35,    -1,
+       8,    47,    38,    -1,     9,    38,    -1,    11,    38,    -1,
+       6,    29,    38,    -1,     6,    30,    38,    -1,    53,    29,
+      38,    -1,    53,    29,    36,    30,    37,    38,    -1,    53,
+      29,    34,    41,    35,    44,    -1,    44,    -1,    48,    -1,
+      51,    47,    -1,    47,    52,    47,    -1,    29,    34,    49,
+      35,    -1,    29,    25,    47,    -1,    29,    36,    47,    37,
+      25,    47,    -1,    29,    -1,    30,    -1,    34,    47,    35,
+      -1,    29,    34,    47,    35,    -1,    29,    36,    47,    37,
+      -1,    -1,    50,    -1,    47,    -1,    47,    26,    50,    -1,
+      22,    -1,    20,    -1,    21,    -1,    22,    -1,    23,    -1,
+      24,    -1,    16,    -1,    17,    -1,    12,    -1,    13,    -1,
+      14,    -1,    15,    -1,    19,    -1,    18,    -1,    27,    -1,
+      28,    -1,    31,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    85,    85,    86,    89,    90,    93,    94,    98,    99,
-     102,   106,   107,   110,   111,   114,   115,   118,   121,   122,
-     125,   126,   127,   128,   129,   130,   131,   132,   133,   136,
-     137,   138,   139,   140,   141,   144,   145,   146,   147,   148,
-     151,   152,   155,   156,   159,   160,   163,   164,   165,   166,
-     167,   168,   169,   170,   171,   172,   173,   174,   177,   178,
-     179
+       0,    84,    84,    88,    89,    92,    93,    96,    97,   100,
+     103,   104,   107,   108,   109,   110,   111,   112,   113,   114,
+     115,   116,   117,   118,   119,   123,   124,   125,   126,   127,
+     128,   131,   132,   133,   134,   135,   138,   139,   142,   143,
+     146,   147,   150,   151,   152,   153,   154,   155,   156,   157,
+     158,   159,   160,   161,   164,   165,   166
 };
 #endif
 
@@ -534,10 +531,9 @@ static const char *const yytname[] =
   "EQUAL_OPERATOR", "COMMA_OPERATOR", "INT_TYPE", "CHAR_TYPE",
   "IDENTIFIER", "INTEGER", "FLOAT", "LEFTBRACE", "RIGHTBRACE", "LEFTPAR",
   "RIGHTPAR", "SQUARELEFTBRACKET", "SQUARERIGHTBRACKET", "NEXTLINE",
-  "$accept", "program", "VarDeclList", "VarDecl", "FuncDeclList",
-  "FuncDecl", "ParamDeclList", "ParamDeclListTail", "ParamDecl", "Block",
-  "StmtList", "Stmt", "expression", "Primary", "ExprList", "ExprListTail",
-  "UnaryOp", "BinaryOp", "TYPE", 0
+  "$accept", "program", "ParamDeclList", "ParamDeclListTail", "ParamDecl",
+  "Block", "StmtList", "Stmt", "expression", "Primary", "ExprList",
+  "ExprListTail", "UnaryOp", "BinaryOp", "TYPE", 0
 };
 #endif
 
@@ -556,25 +552,23 @@ static const yytype_uint16 yytoknum[] =
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    39,    40,    40,    41,    41,    42,    42,    43,    43,
-      44,    45,    45,    46,    46,    47,    47,    48,    49,    49,
-      50,    50,    50,    50,    50,    50,    50,    50,    50,    51,
-      51,    51,    51,    51,    51,    52,    52,    52,    52,    52,
-      53,    53,    54,    54,    55,    55,    56,    56,    56,    56,
-      56,    56,    56,    56,    56,    56,    56,    56,    57,    57,
-      57
+       0,    39,    40,    41,    41,    42,    42,    43,    43,    44,
+      45,    45,    46,    46,    46,    46,    46,    46,    46,    46,
+      46,    46,    46,    46,    46,    47,    47,    47,    47,    47,
+      47,    48,    48,    48,    48,    48,    49,    49,    50,    50,
+      51,    51,    52,    52,    52,    52,    52,    52,    52,    52,
+      52,    52,    52,    52,    53,    53,    53
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1,     1,     0,     2,     3,     6,     1,     2,
-       6,     0,     1,     1,     3,     2,     4,     4,     1,     2,
-       1,     3,     7,     4,     3,     2,     2,     3,     1,     1,
-       2,     3,     4,     3,     6,     1,     1,     3,     4,     4,
-       0,     1,     1,     3,     1,     1,     1,     1,     1,     1,
+       0,     2,     1,     0,     1,     1,     3,     2,     4,     3,
+       1,     2,     1,     3,     7,     4,     3,     2,     2,     3,
+       3,     3,     6,     6,     1,     1,     2,     3,     4,     3,
+       6,     1,     1,     3,     4,     4,     0,     1,     1,     3,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1
+       1,     1,     1,     1,     1,     1,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -582,49 +576,47 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       4,    58,    59,    60,     0,     3,     4,     2,     8,     0,
-       1,     5,     0,     9,     0,     0,     0,     0,    11,     0,
-       6,     0,    12,    13,     0,     0,     0,     0,    15,     0,
-       4,    10,    14,     0,     7,     0,    16,     0,     0,     0,
-       0,     0,     0,     0,    20,    28,     0,    18,     0,     0,
-       0,    45,    44,    35,    36,     0,     0,    29,     0,    25,
-       0,    26,    17,    19,     0,    27,     0,     0,    40,     0,
-       0,    52,    53,    54,    55,    50,    51,    57,    56,    46,
-      47,    48,    49,    24,     0,    30,    21,     0,    23,    33,
-       0,     0,    41,     0,    37,    31,     0,     0,    38,    32,
-      39,     0,    42,    43,     0,    22,    34
+       0,     0,     0,     0,     0,     0,     0,     0,    54,    55,
+      56,     0,    12,     0,    24,     2,    10,     0,     0,     0,
+       0,     0,    41,    40,    31,    32,     0,     0,    25,     0,
+      17,     0,    18,     0,     1,    11,     0,     0,    19,    20,
+       0,     0,    36,     0,     0,    48,    49,    50,    51,    46,
+      47,    53,    52,    42,    43,    44,    45,    16,     0,    26,
+      13,     9,     3,     0,    21,     0,    15,    29,     0,     0,
+      37,     0,    33,    27,     0,     4,     5,     0,     0,     0,
+       0,    34,    28,    35,     0,     0,     7,     0,     0,    38,
+      39,     0,    23,     6,     0,    22,    14,    30,     8
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     4,     5,     6,     7,     8,    21,    22,    23,    45,
-      46,    47,    56,    57,    91,    92,    58,    84,    12
+      -1,    13,    74,    75,    76,    14,    15,    16,    27,    28,
+      69,    70,    29,    58,    17
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -84
+#define YYPACT_NINF -62
 static const yytype_int16 yypact[] =
 {
-     -22,   -84,   -84,   -84,     1,   -84,   -22,   -84,   -22,    -7,
-     -84,   -84,     0,   -84,    16,    -6,     3,   -11,   -22,    18,
-     -84,    11,   -84,    21,    22,    13,    20,   -22,    19,    15,
-     -22,   -84,   -84,    28,   -84,     5,   -84,    44,    25,    50,
-       4,    47,    57,    62,   -84,   -84,    82,     5,     4,    78,
-       4,   -84,   -84,     6,   -84,     4,    45,   -84,     4,   -84,
-      92,   -84,   -84,   -84,    90,   -84,   105,     4,     4,     4,
-     120,   -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,   -84,
-     -84,   -84,   -84,   -84,     4,   150,   -84,     5,   -84,   150,
-      75,    96,   -84,    58,   -84,   150,   141,     4,   -84,   -84,
-     121,     5,   135,   -84,     4,   -84,   150
+       6,   -32,     0,   -27,    38,   -12,     7,     1,   -62,   -62,
+     -62,     6,   -62,    41,   -62,   -62,     6,    13,    38,     5,
+      15,    38,   -62,   -62,   -15,   -62,    38,    33,   -62,    38,
+     -62,    21,   -62,    28,   -62,   -62,   -16,    94,   -62,   -62,
+     109,    38,    38,    38,   124,   -62,   -62,   -62,   -62,   -62,
+     -62,   -62,   -62,   -62,   -62,   -62,   -62,   -62,    38,   154,
+     -62,   -62,     4,    34,   -62,     6,   -62,   154,    79,    30,
+     -62,    62,   -62,   154,    31,   -62,    37,    40,    45,    66,
+      38,   -62,   -62,    63,    55,     4,    53,    52,     6,   139,
+     -62,    38,   -62,   -62,    67,   -62,   -62,   154,   -62
 };
 
 /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int16 yypgoto[] =
+static const yytype_int8 yypgoto[] =
 {
-     -84,   -84,    -3,   -84,   152,   -84,   -84,   143,   -84,   149,
-     129,   -83,   -48,   -84,   -84,    80,   -84,   -84,    17
+     -62,   -62,   -62,    35,   -62,    50,   -10,   -61,   -18,   -62,
+     -62,    39,   -62,   -62,   -57
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -634,63 +626,62 @@ static const yytype_int16 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      64,    10,    66,    11,    96,     1,     2,    70,    37,     3,
-      85,    38,    39,    40,    41,    42,    43,     9,   105,    89,
-      90,    93,    15,    18,    51,    14,    52,    35,    18,    16,
-      19,    67,    20,    53,    54,    24,    95,    30,    55,    19,
-      68,    20,    69,    44,    24,    17,    26,    27,    25,   102,
-      29,    28,    30,    34,    49,    33,   106,    71,    72,    73,
-      74,    75,    76,    77,    78,    36,    79,    80,    81,    82,
-      71,    72,    73,    74,    75,    76,    77,    78,    48,    79,
-      80,    81,    82,    83,    50,    59,    60,    71,    72,    73,
-      74,    75,    76,    77,    78,   100,    79,    80,    81,    82,
-      61,    97,    71,    72,    73,    74,    75,    76,    77,    78,
-      98,    79,    80,    81,    82,    62,    65,    71,    72,    73,
-      74,    75,    76,    77,    78,    87,    79,    80,    81,    82,
-      86,    99,    71,    72,    73,    74,    75,    76,    77,    78,
-      88,    79,    80,    81,    82,   101,   104,    71,    72,    73,
-      74,    75,    76,    77,    78,    94,    79,    80,    81,    82,
-      13,    97,    71,    72,    73,    74,    75,    76,    77,    78,
-      32,    79,    80,    81,    82,    31,    63,   103
+      37,    33,    18,    40,    79,    77,    35,    21,    44,     1,
+      41,    59,     2,     3,     4,     5,     6,     7,    62,    42,
+      63,    43,    64,    67,    68,    71,    30,    96,    77,    19,
+      20,     8,     9,     8,     9,    10,    31,    10,    11,    32,
+      73,    34,    36,    38,    12,    45,    46,    47,    48,    49,
+      50,    51,    52,    39,    53,    54,    55,    56,    22,    60,
+      23,    61,    89,    85,    78,    82,    84,    24,    25,    86,
+      88,    57,    26,    97,    45,    46,    47,    48,    49,    50,
+      51,    52,    87,    53,    54,    55,    56,    11,    91,    94,
+      95,    45,    46,    47,    48,    49,    50,    51,    52,    83,
+      53,    54,    55,    56,    98,    80,    45,    46,    47,    48,
+      49,    50,    51,    52,    81,    53,    54,    55,    56,    90,
+      93,    45,    46,    47,    48,    49,    50,    51,    52,    65,
+      53,    54,    55,    56,    92,     0,    45,    46,    47,    48,
+      49,    50,    51,    52,    66,    53,    54,    55,    56,     0,
+       0,    45,    46,    47,    48,    49,    50,    51,    52,    72,
+      53,    54,    55,    56,     0,    80,    45,    46,    47,    48,
+      49,    50,    51,    52,     0,    53,    54,    55,    56
 };
 
-static const yytype_uint8 yycheck[] =
+static const yytype_int8 yycheck[] =
 {
-      48,     0,    50,     6,    87,    27,    28,    55,     3,    31,
-      58,     6,     7,     8,     9,    10,    11,     0,   101,    67,
-      68,    69,    29,    34,    20,     8,    22,    30,    34,    29,
-      36,    25,    38,    29,    30,    18,    84,    32,    34,    36,
-      34,    38,    36,    38,    27,    29,    35,    26,    30,    97,
-      37,    29,    32,    38,    29,    36,   104,    12,    13,    14,
-      15,    16,    17,    18,    19,    37,    21,    22,    23,    24,
-      12,    13,    14,    15,    16,    17,    18,    19,    34,    21,
-      22,    23,    24,    38,    34,    38,    29,    12,    13,    14,
-      15,    16,    17,    18,    19,    37,    21,    22,    23,    24,
-      38,    26,    12,    13,    14,    15,    16,    17,    18,    19,
-      35,    21,    22,    23,    24,    33,    38,    12,    13,    14,
-      15,    16,    17,    18,    19,    35,    21,    22,    23,    24,
-      38,    35,    12,    13,    14,    15,    16,    17,    18,    19,
-      35,    21,    22,    23,    24,     4,    25,    12,    13,    14,
-      15,    16,    17,    18,    19,    35,    21,    22,    23,    24,
-       8,    26,    12,    13,    14,    15,    16,    17,    18,    19,
-      27,    21,    22,    23,    24,    26,    47,    97
+      18,    11,    34,    21,    65,    62,    16,    34,    26,     3,
+      25,    29,     6,     7,     8,     9,    10,    11,    34,    34,
+      36,    36,    38,    41,    42,    43,    38,    88,    85,    29,
+      30,    27,    28,    27,    28,    31,    29,    31,    32,    38,
+      58,     0,    29,    38,    38,    12,    13,    14,    15,    16,
+      17,    18,    19,    38,    21,    22,    23,    24,    20,    38,
+      22,    33,    80,    26,    30,    35,    35,    29,    30,    29,
+       4,    38,    34,    91,    12,    13,    14,    15,    16,    17,
+      18,    19,    37,    21,    22,    23,    24,    32,    25,    36,
+      38,    12,    13,    14,    15,    16,    17,    18,    19,    37,
+      21,    22,    23,    24,    37,    26,    12,    13,    14,    15,
+      16,    17,    18,    19,    35,    21,    22,    23,    24,    80,
+      85,    12,    13,    14,    15,    16,    17,    18,    19,    35,
+      21,    22,    23,    24,    84,    -1,    12,    13,    14,    15,
+      16,    17,    18,    19,    35,    21,    22,    23,    24,    -1,
+      -1,    12,    13,    14,    15,    16,    17,    18,    19,    35,
+      21,    22,    23,    24,    -1,    26,    12,    13,    14,    15,
+      16,    17,    18,    19,    -1,    21,    22,    23,    24
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    27,    28,    31,    40,    41,    42,    43,    44,    57,
-       0,    41,    57,    43,    57,    29,    29,    29,    34,    36,
-      38,    45,    46,    47,    57,    30,    35,    26,    29,    37,
-      32,    48,    46,    36,    38,    41,    37,     3,     6,     7,
-       8,     9,    10,    11,    38,    48,    49,    50,    34,    29,
-      34,    20,    22,    29,    30,    34,    51,    52,    55,    38,
-      29,    38,    33,    49,    51,    38,    51,    25,    34,    36,
-      51,    12,    13,    14,    15,    16,    17,    18,    19,    21,
-      22,    23,    24,    38,    56,    51,    38,    35,    35,    51,
-      51,    53,    54,    51,    35,    51,    50,    26,    35,    35,
-      37,     4,    51,    54,    25,    50,    51
+       0,     3,     6,     7,     8,     9,    10,    11,    27,    28,
+      31,    32,    38,    40,    44,    45,    46,    53,    34,    29,
+      30,    34,    20,    22,    29,    30,    34,    47,    48,    51,
+      38,    29,    38,    45,     0,    45,    29,    47,    38,    38,
+      47,    25,    34,    36,    47,    12,    13,    14,    15,    16,
+      17,    18,    19,    21,    22,    23,    24,    38,    52,    47,
+      38,    33,    34,    36,    38,    35,    35,    47,    47,    49,
+      50,    47,    35,    47,    41,    42,    43,    53,    30,    46,
+      26,    35,    35,    37,    35,    26,    29,    37,     4,    47,
+      50,    25,    44,    42,    36,    38,    46,    47,    37
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1504,304 +1495,279 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
-#line 85 "Project2.y"
-    {std::cout<< "Bison Recognized FuncDeclList \n";;}
-    break;
-
-  case 3:
-#line 86 "Project2.y"
-    {std::cout<< "Bison Recognized VarDeclList \n";;}
+        case 3:
+#line 88 "Project2.y"
+    {std::cout<< "Bison Recognized Empty Parameters \n";;}
     break;
 
   case 4:
 #line 89 "Project2.y"
-    {std::cout<< "Bison Recognized Empty VarDeclList \n";;}
+    {std::cout<< "Bison Recognized ParamDeclListTail \n";;}
     break;
 
   case 5:
-#line 90 "Project2.y"
-    {std::cout<< "Bison Recognized a VarDecl Recursion \n";;}
+#line 92 "Project2.y"
+    {std::cout<< "Bison Recognized a ParamDecl \n";;}
     break;
 
   case 6:
 #line 93 "Project2.y"
-    {std::cout<< "Bison Recognized VarDecl \n";;}
+    {std::cout<< "Bison Recognized ParamList \n";;}
     break;
 
   case 7:
-#line 94 "Project2.y"
-    {std::cout<< "Bison Recognized Square Bracket Decl \n";;}
+#line 96 "Project2.y"
+    {std::cout<< "Bison Recognized ParamDecl \n";;}
     break;
 
   case 8:
-#line 98 "Project2.y"
-    {std::cout<< "Bison Recognized FuncDeclList \n";;}
+#line 97 "Project2.y"
+    {std::cout<< "Bison Recognized Brackets ParamDecl \n";;}
     break;
 
   case 9:
-#line 99 "Project2.y"
-    {std::cout<< "Bison Recognized FuncDeclList Recursion \n";;}
+#line 100 "Project2.y"
+    {std::cout<< "Bison Recognized Blocks \n";;}
     break;
 
   case 10:
-#line 102 "Project2.y"
-    {std::cout<< "Bison Recognized VarDecl \n";;}
+#line 103 "Project2.y"
+    {std::cout<< "Bison Recognized a Statement \n";;}
     break;
 
   case 11:
-#line 106 "Project2.y"
-    {std::cout<< "Bison Recognized Empty Parameters \n";;}
+#line 104 "Project2.y"
+    {std::cout<< "Bison Recognized Statement recursion \n";;}
     break;
 
   case 12:
 #line 107 "Project2.y"
-    {std::cout<< "Bison Recognized ParamDeclListTail \n";;}
-    break;
-
-  case 13:
-#line 110 "Project2.y"
-    {std::cout<< "Bison Recognized a ParamDecl \n";;}
-    break;
-
-  case 14:
-#line 111 "Project2.y"
-    {std::cout<< "Bison Recognized ParamList \n";;}
-    break;
-
-  case 15:
-#line 114 "Project2.y"
-    {std::cout<< "Bison Recognized ParamDecl \n";;}
-    break;
-
-  case 16:
-#line 115 "Project2.y"
-    {std::cout<< "Bison Recognized Brackets ParamDecl \n";;}
-    break;
-
-  case 17:
-#line 118 "Project2.y"
-    {std::cout<< "Bison Recognized Blocks \n";;}
-    break;
-
-  case 18:
-#line 121 "Project2.y"
-    {std::cout<< "Bison Recognized a Statement \n";;}
-    break;
-
-  case 19:
-#line 122 "Project2.y"
-    {std::cout<< "Bison Recognized Statement recursion \n";;}
-    break;
-
-  case 20:
-#line 125 "Project2.y"
     {std::cout<< "Bison Recognized Semi-Colon End Statement \n";;}
     break;
 
-  case 21:
-#line 126 "Project2.y"
+  case 13:
+#line 108 "Project2.y"
     {std::cout<< "Bison Recognized Read Statment \n";;}
     break;
 
-  case 22:
-#line 127 "Project2.y"
+  case 14:
+#line 109 "Project2.y"
     {std::cout<< "Bison Recognized If Else Statement \n";;}
     break;
 
-  case 23:
-#line 128 "Project2.y"
+  case 15:
+#line 110 "Project2.y"
     {std::cout<< "Bison Recognized While Loop \n";;}
     break;
 
-  case 24:
-#line 129 "Project2.y"
+  case 16:
+#line 111 "Project2.y"
     {std::cout<< "Bison Recognized WriteStatement \n";;}
     break;
 
-  case 25:
-#line 130 "Project2.y"
+  case 17:
+#line 112 "Project2.y"
     {std::cout<< "Bison Recognized WriteLN Statement \n";;}
     break;
 
-  case 26:
-#line 131 "Project2.y"
+  case 18:
+#line 113 "Project2.y"
     {std::cout<< "Bison Recognized Break Statement \n";;}
     break;
 
-  case 27:
-#line 132 "Project2.y"
-    {std::cout<< "Bison Recognized Return Statement \n";;}
+  case 19:
+#line 114 "Project2.y"
+    {std::cout<< "Bison Recognized Return Identifier \n";;}
     break;
 
-  case 28:
-#line 133 "Project2.y"
+  case 20:
+#line 115 "Project2.y"
+    {std::cout<< "Bison Recognized Return Identifier \n";;}
+    break;
+
+  case 21:
+#line 116 "Project2.y"
+    {std::cout<< "Bison Recognized VarDecl \n";;}
+    break;
+
+  case 22:
+#line 117 "Project2.y"
+    {std::cout<< "Bison Recognized Square Bracket Decl \n";;}
+    break;
+
+  case 23:
+#line 118 "Project2.y"
+    {std::cout<< "Bison Recognized VarDecl \n";;}
+    break;
+
+  case 24:
+#line 119 "Project2.y"
     {std::cout<< "Bison Recognized Block Statement \n";;}
     break;
 
-  case 29:
-#line 136 "Project2.y"
+  case 25:
+#line 123 "Project2.y"
     {std::cout<< "Bison Recognized a Primary Expression \n";;}
     break;
 
-  case 30:
-#line 137 "Project2.y"
+  case 26:
+#line 124 "Project2.y"
     {std::cout<< "Bison Recognized UnaryOp Expression \n";;}
     break;
 
-  case 31:
-#line 138 "Project2.y"
+  case 27:
+#line 125 "Project2.y"
     {std::cout<< "Bison Recognized Binary Expression \n";;}
     break;
 
-  case 32:
-#line 139 "Project2.y"
+  case 28:
+#line 126 "Project2.y"
     {std::cout<< "Bison Recognized an Expression List \n";;}
     break;
 
-  case 33:
-#line 140 "Project2.y"
+  case 29:
+#line 127 "Project2.y"
     {std::cout<< "Bison Recognized Declaration Expression \n";;}
     break;
 
-  case 34:
-#line 141 "Project2.y"
+  case 30:
+#line 128 "Project2.y"
     {std::cout<< "Bison Recognized Bracketed Expression \n";;}
     break;
 
-  case 35:
-#line 144 "Project2.y"
+  case 31:
+#line 131 "Project2.y"
     {std::cout<< "Bison Recognized an Identifier \n";;}
     break;
 
-  case 36:
-#line 145 "Project2.y"
+  case 32:
+#line 132 "Project2.y"
     {std::cout<< "Bison Recognized an Integer \n";;}
     break;
 
-  case 37:
-#line 146 "Project2.y"
+  case 33:
+#line 133 "Project2.y"
     {std::cout<< "Bison Recognized Parenthesis Expression \n";;}
     break;
 
-  case 38:
-#line 147 "Project2.y"
+  case 34:
+#line 134 "Project2.y"
     {std::cout<< "Bison Recognized Identifier Parenthesis Expression \n";;}
     break;
 
-  case 39:
-#line 148 "Project2.y"
+  case 35:
+#line 135 "Project2.y"
     {std::cout<< "Bison Recognized Identifier SquareBracket Expression \n";;}
     break;
 
-  case 40:
-#line 151 "Project2.y"
+  case 36:
+#line 138 "Project2.y"
     {std::cout<< "Bison Recognized Empty ExprList \n";;}
     break;
 
-  case 41:
-#line 152 "Project2.y"
+  case 37:
+#line 139 "Project2.y"
     {std::cout<< "Bison Recognized ExprListTail \n";;}
     break;
 
-  case 42:
-#line 155 "Project2.y"
+  case 38:
+#line 142 "Project2.y"
     {std::cout<< "Bison Recognized Expression \n";;}
     break;
 
-  case 43:
-#line 156 "Project2.y"
+  case 39:
+#line 143 "Project2.y"
     {std::cout<< "Bison Recognized Expression Recursion \n";;}
     break;
 
-  case 44:
-#line 159 "Project2.y"
+  case 40:
+#line 146 "Project2.y"
     {std::cout<< "Bison Recognized Sub_Operator \n";;}
     break;
 
-  case 45:
-#line 160 "Project2.y"
+  case 41:
+#line 147 "Project2.y"
     {std::cout<< "Bison Recognized NOT_Operator \n";;}
     break;
 
-  case 46:
-#line 163 "Project2.y"
+  case 42:
+#line 150 "Project2.y"
     {std::cout<< "Bison Recognized Binary Add Operator \n";;}
     break;
 
-  case 47:
-#line 164 "Project2.y"
+  case 43:
+#line 151 "Project2.y"
     {std::cout<< "Bison Recognized Binary Sub_Operator \n";;}
     break;
 
-  case 48:
-#line 165 "Project2.y"
+  case 44:
+#line 152 "Project2.y"
     {std::cout<< "Bison Recognized Binary Multipy Operator \n";;}
     break;
 
-  case 49:
-#line 166 "Project2.y"
+  case 45:
+#line 153 "Project2.y"
     {std::cout<< "Bison Recognized Binary Divide Opeartor \n";;}
     break;
 
-  case 50:
-#line 167 "Project2.y"
+  case 46:
+#line 154 "Project2.y"
     {std::cout<< "Bison Recognized Binary Equal Operator \n";;}
     break;
 
-  case 51:
-#line 168 "Project2.y"
+  case 47:
+#line 155 "Project2.y"
     {std::cout<< "Bison Recognized Binary Not Equal Operator \n";;}
     break;
 
-  case 52:
-#line 169 "Project2.y"
+  case 48:
+#line 156 "Project2.y"
     {std::cout<< "Bison Recognized Binary Greater Comparison \n";;}
     break;
 
-  case 53:
-#line 170 "Project2.y"
+  case 49:
+#line 157 "Project2.y"
     {std::cout<< "Bison Recognized Binary Greater Eq Comparison \n";;}
     break;
 
-  case 54:
-#line 171 "Project2.y"
+  case 50:
+#line 158 "Project2.y"
     {std::cout<< "Bison Recognized Binary Less Comparison \n";;}
     break;
 
-  case 55:
-#line 172 "Project2.y"
+  case 51:
+#line 159 "Project2.y"
     {std::cout<< "Bison Recognized Binary Less Eq Comparison \n";;}
     break;
 
-  case 56:
-#line 173 "Project2.y"
+  case 52:
+#line 160 "Project2.y"
     {std::cout<< "Bison Recognized Binary And Comparison \n";;}
     break;
 
-  case 57:
-#line 174 "Project2.y"
+  case 53:
+#line 161 "Project2.y"
     {std::cout<< "Bison Recognized Binary Or Comparison \n";;}
     break;
 
-  case 58:
-#line 177 "Project2.y"
+  case 54:
+#line 164 "Project2.y"
     {std::cout<< "Bison Recognized Type Int \n";;}
     break;
 
-  case 59:
-#line 178 "Project2.y"
+  case 55:
+#line 165 "Project2.y"
     {std::cout<< "Bison Recognized Type Char \n";;}
     break;
 
-  case 60:
-#line 179 "Project2.y"
+  case 56:
+#line 166 "Project2.y"
     {std::cout<< "Bison Recognized Type Float \n";;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1805 "Project2.cpp"
+#line 1771 "Project2.cpp"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2015,7 +1981,7 @@ yyreturn:
 }
 
 
-#line 183 "Project2.y"
+#line 170 "Project2.y"
 
 
 

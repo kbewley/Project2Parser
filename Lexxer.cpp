@@ -1,6 +1,6 @@
-#line 2 "lexer.cpp"
+#line 2 "Lexxer.cpp"
 
-#line 4 "lexer.cpp"
+#line 4 "Lexxer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -497,7 +497,7 @@ char *yytext;
 #line 2 "Project2.l"
 
 #include "Project2.hpp"
-#line 501 "lexer.cpp"
+#line 501 "Lexxer.cpp"
 
 #define INITIAL 0
 
@@ -681,7 +681,7 @@ YY_DECL
     
 #line 11 "Project2.l"
 
-#line 685 "lexer.cpp"
+#line 685 "Lexxer.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -950,7 +950,7 @@ YY_RULE_SETUP
 #line 48 "Project2.l"
 ECHO;
 	YY_BREAK
-#line 954 "lexer.cpp"
+#line 954 "Lexxer.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

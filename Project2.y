@@ -63,9 +63,8 @@ extern FILE *yyin;
 %type <operation> ParamDeclListTail
 %type <operation> ParamDeclList
 %type <operation> ParamDecl
-%type <operation> VarDeclList
-%type <operation> VarDecl
-%type <operation> FuncDecl
+
+
 %type <operation> Block
 %type <operation> StmtList 
 %type <operation> Stmt 
@@ -74,7 +73,7 @@ extern FILE *yyin;
 %type <operation> ExprList
 %type <operation> ExprListTail
 %type <operation> TYPE
-%type <operation> FuncDeclList
+
 %type <operation> BinaryOp
 %type <operation> Primary
 
@@ -82,26 +81,9 @@ extern FILE *yyin;
 
 /* descriptions of expected inputs     corresponding actions (in C) */
                	
-program 	   		:FuncDeclList																		{std::cout<< "Bison Recognized FuncDeclList \n";}
-                    |VarDeclList                                                                        {std::cout<< "Bison Recognized VarDeclList \n";}
+program 	   		: StmtList
 			   		;
-		       	
-VarDeclList    		: /*empty*/                                                                         {std::cout<< "Bison Recognized Empty VarDeclList \n";}
-                    | VarDecl VarDeclList	                                                            {std::cout<< "Bison Recognized a VarDecl Recursion \n";}
-		       		;
-		       	
-VarDecl 	   		: TYPE IDENTIFIER NEXTLINE															{std::cout<< "Bison Recognized VarDecl \n";}
-			   		| TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE				{std::cout<< "Bison Recognized Square Bracket Decl \n";}
-			   		;
-               	
-               	
-FuncDeclList    	: FuncDecl																			{std::cout<< "Bison Recognized FuncDeclList \n";}
-			   		| FuncDecl FuncDeclList																{std::cout<< "Bison Recognized FuncDeclList Recursion \n";}
-			   		;
-               	
-FuncDecl 	   		: TYPE IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR Block								{std::cout<< "Bison Recognized VarDecl \n";}
-		 	   		;
-               	
+
 			   	
 ParamDeclList  		: /*empty*/ 																		{std::cout<< "Bison Recognized Empty Parameters \n";}
 			   		| ParamDeclListTail																	{std::cout<< "Bison Recognized ParamDeclListTail \n";}
@@ -115,7 +97,7 @@ ParamDecl 			: TYPE IDENTIFIER																	{std::cout<< "Bison Recognized Pa
 		  			| TYPE IDENTIFIER SQUARELEFTBRACKET SQUARERIGHTBRACKET								{std::cout<< "Bison Recognized Brackets ParamDecl \n";}
 		 		   	;
 		  
-Block 				: LEFTBRACE VarDeclList StmtList RIGHTBRACE											{std::cout<< "Bison Recognized Blocks \n";}
+Block 				: LEFTBRACE StmtList RIGHTBRACE											            {std::cout<< "Bison Recognized Blocks \n";}
 	  				;
 	  
 StmtList 			: Stmt																				{std::cout<< "Bison Recognized a Statement \n";}
@@ -129,8 +111,13 @@ Stmt 				: NEXTLINE																			{std::cout<< "Bison Recognized Semi-Colon 
 					| WRITE_STATEMENT expression NEXTLINE												{std::cout<< "Bison Recognized WriteStatement \n";}
 					| WRITELN_STATEMENT NEXTLINE														{std::cout<< "Bison Recognized WriteLN Statement \n";}
 					| BREAK_STATEMENT NEXTLINE															{std::cout<< "Bison Recognized Break Statement \n";}
-					| RETURN_STATEMENT IDENTIFIER NEXTLINE												{std::cout<< "Bison Recognized Return Statement \n";}
+					| RETURN_STATEMENT IDENTIFIER NEXTLINE												{std::cout<< "Bison Recognized Return Identifier \n";}
+                    | RETURN_STATEMENT INTEGER NEXTLINE                                                 {std::cout<< "Bison Recognized Return Identifier \n";}
+                    | TYPE IDENTIFIER NEXTLINE                                                          {std::cout<< "Bison Recognized VarDecl \n";}
+                    | TYPE IDENTIFIER SQUARELEFTBRACKET INTEGER SQUARERIGHTBRACKET NEXTLINE             {std::cout<< "Bison Recognized Square Bracket Decl \n";}
+                    | TYPE IDENTIFIER LEFTPAR ParamDeclList RIGHTPAR Block                              {std::cout<< "Bison Recognized VarDecl \n";}
 					| Block																				{std::cout<< "Bison Recognized Block Statement \n";}
+
 					;
 					
 expression 			: Primary																			{std::cout<< "Bison Recognized a Primary Expression \n";}
